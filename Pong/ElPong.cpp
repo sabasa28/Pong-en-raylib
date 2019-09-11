@@ -1,23 +1,21 @@
 #include <time.h>
 #include "raylib.h"
 #include <stdlib.h>
-//CAMBIOS. REINICIAR LAS CANCIONES CADA VEZ, HACER QUE LOS POWERUP SPAWNEEN CON UN TIMER DE JUEGO Y NO DE EJECUCION
+
 enum exist
 {
-	yeah,
-	nope
-}powerUPexists = nope; powerUP2exists = nope;
+	Exists,
+	DoesntExist
+}powerUPexists = DoesntExist; powerUP2exists = DoesntExist;
 
 int main(void)
 {
-	// Initialization
-	//---------------------------------------------------------
 	const int screenWidth = 800;
 	const int screenHeight = 450;
-	int cronometro = (double)clock() / 1000;
-	float cronometroflo = (double)clock() / 1000;
+	int cronometer = (double)clock() / 1000;
+	float cronometerflo = (double)clock() / 1000;
 	srand(time(NULL));
-	InitWindow(screenWidth, screenHeight, "PONG - un intento humilde");
+	InitWindow(screenWidth, screenHeight, "PONG - Inaki Diez Galarza");//(Iñaki)
 	InitAudioDevice();
 	Rectangle PowerUP1;
 	Rectangle PowerUP2;
@@ -31,51 +29,50 @@ int main(void)
 	PowerUP2.y = -10;
 	Vector2 ballPosition = { GetScreenWidth() / 2, GetScreenHeight() / 2 };
 	Vector2 ballSpeed = { 3.0f, 3.0f };
-	float Paleta_speed = 2.5f;
-	float Altura_paletas = 60.0f;
-	float Ancho_paletas = 10.0f;
-	int ballRadius = 10;
-	Image raton = LoadImage("imagenes/white_mouse.png");
-	Image raton2 = LoadImage("imagenes/gray_mouse.png");
-	Image estambre = LoadImage("imagenes/estambre_rojo.png");
-	Image barras = LoadImage("imagenes/cat_standing.png");
-	Image lasercat = LoadImage("imagenes/fat cat staring.jpg");
-	//ImageCrop(&lasercat, (Rectangle) { 100, 10, 280, 380 });
-	ImageResize(&raton2, PowerUP2.width, PowerUP2.height);
-	ImageResize(&raton, PowerUP1.width, PowerUP1.height);
-	ImageResize(&barras, Ancho_paletas*4, Altura_paletas);
-	ImageResize(&lasercat, screenWidth, screenHeight);
-	ImageResize(&estambre, ballRadius * 4, ballRadius * 4);
-	Texture2D texturaPowerUP2 = LoadTextureFromImage(raton2);
-	Texture2D texturaPowerUP = LoadTextureFromImage(raton);
-	Texture2D texturaFondo = LoadTextureFromImage(lasercat);
-	Texture2D texturaBarra = LoadTextureFromImage(barras);
-	Texture2D texturaBola = LoadTextureFromImage(estambre);
-	UnloadImage(raton2);
-	UnloadImage(raton);
-	UnloadImage(estambre);
-	UnloadImage(barras);
-	UnloadImage(lasercat);
+	float paddle_speed = 2.5f;
+	float paddle_height = 60.0f;
+	float paddle_width = 10.0f;
+	int ball_radius = 10;
+	Image mouse1 = LoadImage("imagenes/white_mouse.png");
+	Image mouse2 = LoadImage("imagenes/gray_mouse.png");
+	Image worsted = LoadImage("imagenes/estambre_rojo.png");
+	Image standing_cat = LoadImage("imagenes/cat_standing.png");
+	Image cat_staring = LoadImage("imagenes/fat cat staring.jpg");
+	ImageResize(&mouse2, PowerUP2.width, PowerUP2.height);
+	ImageResize(&mouse1, PowerUP1.width, PowerUP1.height);
+	ImageResize(&standing_cat, paddle_width*4, paddle_height);
+	ImageResize(&cat_staring, screenWidth, screenHeight);
+	ImageResize(&worsted, ball_radius * 4, ball_radius * 4);
+	Texture2D texturaPowerUP2 = LoadTextureFromImage(mouse2);
+	Texture2D texturaPowerUP = LoadTextureFromImage(mouse1);
+	Texture2D texturaFondo = LoadTextureFromImage(cat_staring);
+	Texture2D texturaBarra = LoadTextureFromImage(standing_cat);
+	Texture2D texturaBola = LoadTextureFromImage(worsted);
+	UnloadImage(mouse2);
+	UnloadImage(mouse1);
+	UnloadImage(worsted);
+	UnloadImage(standing_cat);
+	UnloadImage(cat_staring);
 	Music gatitos = LoadMusicStream("sonidos/gatitos_song.ogg");
 	Music metalNyan = LoadMusicStream("sonidos/nyanHype.ogg");
 	Music nihaoNyan = LoadMusicStream("sonidos/NyanNyan_RockVersion.ogg");
 	SetMusicVolume(metalNyan, 0.25);
-	bool isColliding = false;
-	bool isColliding2 = false;
+	bool colliding = false;
+	bool colliding2 = false;
 	int lastPlayerHit = 1;
-	int puntosP1 = 0;
-	int puntosP2 = 0;
-	int partidasGanadasP1 = 0;
-	int partidasGanadasP2 = 0;
-	int puntosTotales = 0;
+	int pointsP1 = 0;
+	int pointsP2 = 0;
+	int total_points = 0;
+	int won_matchesP1 = 0;
+	int won_matchesP2 = 0;
 	Rectangle P1;
 	Rectangle P2;
-	int powerGravityP1 = 3;
-	int powerGravityP2 = 3;
-	P1.height = Altura_paletas;
-	P1.width = Ancho_paletas;
-	P2.height = Altura_paletas;
-	P2.width = Ancho_paletas;
+	int power_gravityP1 = 3;
+	int power_gravityP2 = 3;
+	P1.height = paddle_height;
+	P1.width = paddle_width;
+	P2.height = paddle_height;
+	P2.width = paddle_width;
 	P1.x = GetScreenWidth() / 8 - 20;
 	P1.y = GetScreenHeight() / 2;
 	P2.x = GetScreenWidth() - GetScreenWidth() / 8 +20;
@@ -106,41 +103,41 @@ int main(void)
 	Rectangle RedButton2;
 	Rectangle GreenButton2;
 	Rectangle BlueButton2;
-	int heightColorButtons = 30;
-	int widthColorButtons = 100;
-	RedButton.width = widthColorButtons;
-	RedButton.height = heightColorButtons;
-	RedButton2.width = widthColorButtons;
-	RedButton2.height = heightColorButtons;
-	GreenButton.width = widthColorButtons;
-	GreenButton.height = heightColorButtons;
-	GreenButton2.width = widthColorButtons;
-	GreenButton2.height = heightColorButtons;
-	BlueButton.width = widthColorButtons;
-	BlueButton.height = heightColorButtons;
-	BlueButton2.width = widthColorButtons;
-	BlueButton2.height = heightColorButtons;
-	int yP1buttons = 350;
-	int yP2buttons = 400;
-	int xRedButtons = 250;
-	int xGreenButtons = 350;
-	int xBlueButtons = 450;
-	RedButton.x = xRedButtons;
-	RedButton.y = yP1buttons;
-	RedButton2.x = xRedButtons;
-	RedButton2.y = yP2buttons;
-	GreenButton.x = xGreenButtons;
-	GreenButton.y = yP1buttons;
-	GreenButton2.x = xGreenButtons;
-	GreenButton2.y = yP2buttons;
-	BlueButton.x = xBlueButtons;
-	BlueButton.y = yP1buttons;
-	BlueButton2.x = xBlueButtons;
-	BlueButton2.y = yP2buttons;
+	int coloredbuttons_height = 30;
+	int coloredbuttons_width = 100;
+	RedButton.width = coloredbuttons_width;
+	RedButton.height = coloredbuttons_height;
+	RedButton2.width = coloredbuttons_width;
+	RedButton2.height = coloredbuttons_height;
+	GreenButton.width = coloredbuttons_width;
+	GreenButton.height = coloredbuttons_height;
+	GreenButton2.width = coloredbuttons_width;
+	GreenButton2.height = coloredbuttons_height;
+	BlueButton.width = coloredbuttons_width;
+	BlueButton.height = coloredbuttons_height;
+	BlueButton2.width = coloredbuttons_width;
+	BlueButton2.height = coloredbuttons_height;
+	int P1_colored_buttons_y = 350;
+	int P2_colored_buttons_y = 400;
+	int red_buttons_x = 250;
+	int green_buttons_x = 350;
+	int blue_buttons_x = 450;
+	RedButton.x = red_buttons_x;
+	RedButton.y = P1_colored_buttons_y;
+	RedButton2.x = red_buttons_x;
+	RedButton2.y = P2_colored_buttons_y;
+	GreenButton.x = green_buttons_x;
+	GreenButton.y = P1_colored_buttons_y;
+	GreenButton2.x = green_buttons_x;
+	GreenButton2.y = P2_colored_buttons_y;
+	BlueButton.x = blue_buttons_x;
+	BlueButton.y = P1_colored_buttons_y;
+	BlueButton2.x = blue_buttons_x;
+	BlueButton2.y = P2_colored_buttons_y;
 	int lastTimer = 0;
 	int lastTimer2 = 0;
 	bool invisible = false;
-	float invisiTimer;
+	float invisibility_timer;
 	
 	while (!WindowShouldClose())
 	{
@@ -153,11 +150,11 @@ int main(void)
 				UpdateMusicStream(metalNyan);
 				BeginDrawing();
 				ClearBackground(RAYWHITE);
-				if (puntosP1 >= 10)
+				if (pointsP1 >= 10)
 				{
 					winner = 1;
 				}
-				else if (puntosP2 >= 10)
+				else if (pointsP2 >= 10)
 				{
 					winner = 2;
 				}
@@ -166,8 +163,8 @@ int main(void)
 				DrawText("Press 'R' to play again.", 80, 250, 30, BLACK);
 				DrawText("Press 'M' to go to menu.", 80, 290, 30, BLACK);
 				DrawText("Press 'ESC' to quit.", 80, 330, 30, BLACK);
-				DrawText(TextFormat("Partidas ganadas P1: %i", partidasGanadasP1), 500, 330, 20, P1color);
-				DrawText(TextFormat("Partidas ganadas P2: %i", partidasGanadasP2), 500, 360, 20, P2color);
+				DrawText(TextFormat("Won matches P1: %i", won_matchesP1), 500, 330, 20, P1color);
+				DrawText(TextFormat("Won matches P2: %i", won_matchesP2), 500, 360, 20, P2color);
 				if (IsKeyPressed('M'))
 				{
 					menu = true;
@@ -190,8 +187,8 @@ int main(void)
 				BeginDrawing();
 				ClearBackground(RAYWHITE);
 				DrawTexture(texturaFondo, 0, 0, WHITE);
-				partidasGanadasP1 = 0;
-				partidasGanadasP2 = 0;
+				won_matchesP1 = 0;
+				won_matchesP2 = 0;
 				DrawRectangle(PlayButton.x,PlayButton.y,PlayButton.width,PlayButton.height,BLUE);
 				DrawRectangle(ExitButton.x, ExitButton.y, ExitButton.width, ExitButton.height, RED);
 				DrawRectangle(RedButton.x, RedButton.y, RedButton.width, RedButton.height, RED);
@@ -200,51 +197,51 @@ int main(void)
 				DrawRectangle(GreenButton2.x, GreenButton2.y, GreenButton2.width, GreenButton2.height, GREEN);
 				DrawRectangle(BlueButton.x, BlueButton.y, BlueButton.width, BlueButton.height, BLUE);
 				DrawRectangle(BlueButton2.x, BlueButton2.y, BlueButton2.width, BlueButton2.height, BLUE);
-				DrawText("P1 color:", 80, yP1buttons, 35, BLACK);
-				DrawText("P2 color:", 75, yP2buttons, 35, BLACK);
+				DrawText("P1 color:", 80, P1_colored_buttons_y, 35, BLACK);
+				DrawText("P2 color:", 75, P2_colored_buttons_y, 35, BLACK);
 				DrawText("Play", 300, 130, 80, BLACK);
 				DrawText("Exit", 330, 260, 50, BLACK);
 				restarted = true;
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), RedButton))
 				{
-					RedButton.y = yP1buttons - 10;
-					BlueButton.y = yP1buttons;
-					GreenButton.y = yP1buttons;
+					RedButton.y = P1_colored_buttons_y - 10;
+					BlueButton.y = P1_colored_buttons_y;
+					GreenButton.y = P1_colored_buttons_y;
 					P1color = RED;
 				}
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), GreenButton))
 				{
-					RedButton.y = yP1buttons;
-					BlueButton.y = yP1buttons;
-					GreenButton.y = yP1buttons - 10;
+					RedButton.y = P1_colored_buttons_y;
+					BlueButton.y = P1_colored_buttons_y;
+					GreenButton.y = P1_colored_buttons_y - 10;
 					P1color = GREEN;
 				}
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), BlueButton))
 				{
-					RedButton.y = yP1buttons;
-					BlueButton.y = yP1buttons - 10;
-					GreenButton.y = yP1buttons;
+					RedButton.y = P1_colored_buttons_y;
+					BlueButton.y = P1_colored_buttons_y - 10;
+					GreenButton.y = P1_colored_buttons_y;
 					P1color = BLUE;
 				}
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), RedButton2))
 				{
-					RedButton2.y = yP2buttons - 10;
-					BlueButton2.y = yP2buttons;
-					GreenButton2.y = yP2buttons;
+					RedButton2.y = P2_colored_buttons_y - 10;
+					BlueButton2.y = P2_colored_buttons_y;
+					GreenButton2.y = P2_colored_buttons_y;
 					P2color = RED;
 				}
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), GreenButton2))
 				{
-					RedButton2.y = yP2buttons;
-					BlueButton2.y = yP2buttons;
-					GreenButton2.y = yP2buttons - 10;
+					RedButton2.y = P2_colored_buttons_y;
+					BlueButton2.y = P2_colored_buttons_y;
+					GreenButton2.y = P2_colored_buttons_y - 10;
 					P2color = GREEN;
 				}
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), BlueButton2))
 				{
-					RedButton2.y = yP2buttons;
-					BlueButton2.y = yP2buttons - 10;
-					GreenButton2.y = yP2buttons;
+					RedButton2.y = P2_colored_buttons_y;
+					BlueButton2.y = P2_colored_buttons_y - 10;
+					GreenButton2.y = P2_colored_buttons_y;
 					P2color = BLUE;
 				}
 				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), ExitButton)) CloseWindow();
@@ -257,11 +254,11 @@ int main(void)
 
 		ballPosition.x = GetScreenWidth() / 2;
 		ballPosition.y = GetScreenHeight() / 2;
-		isColliding = false;
-		isColliding2 = false;
-		puntosP1 = 0;
-		puntosP2 = 0;
-		puntosTotales = 0;
+		colliding = false;
+		colliding2 = false;
+		pointsP1 = 0;
+		pointsP2 = 0;
+		total_points = 0;
 		P1.x = GetScreenWidth() / 8 -20;
 		P1.y = GetScreenHeight() / 2;
 		P2.x = GetScreenWidth() - GetScreenWidth() / 8 + 20;
@@ -270,117 +267,112 @@ int main(void)
 		StartigFPS = FPS;
 		pause = true;
 		framesCounter = 0;
-		powerGravityP1 = 3;
-		powerGravityP2 = 3;
+		power_gravityP1 = 3;
+		power_gravityP2 = 3;
 		SetTargetFPS(FPS);
 		PlayMusicStream(nihaoNyan);
-		while (!WindowShouldClose())   // Detect window close button or ESC key
+		cronometer = (double)clock() / 1000;
+		cronometerflo = (double)clock() / 1000;
+		lastTimer = cronometer;
+		lastTimer2 = cronometer;
+		while (!WindowShouldClose())   
 		{
 			UpdateMusicStream(nihaoNyan);
 			DrawTexture(texturaFondo, 0, 0, WHITE);
-			cronometro = (double)clock() / 1000;
-			cronometroflo = (double)clock() / 1000;
-			if (puntosP1 >= 10)
+			cronometer = (double)clock() / 1000;
+			cronometerflo = (double)clock() / 1000;
+			if (pointsP1 >= 10)
 			{
-				partidasGanadasP1 += 1;
+				won_matchesP1 += 1;
 				break;
 			}
-			if (puntosP2 >= 10)
+			if (pointsP2 >= 10)
 			{
-				partidasGanadasP2 += 1;
+				won_matchesP2 += 1;
 				break;
 			}
-			// Update
-			//-----------------------------------------------------
+		
 			if (IsKeyPressed(KEY_SPACE)) pause = !pause;
 			if (!pause)
 			{
-				if (CheckCollisionCircleRec(ballPosition,ballRadius,PowerUP1)&&powerUPexists==yeah)
+				if (CheckCollisionCircleRec(ballPosition,ball_radius,PowerUP1)&&powerUPexists==Exists)
 				{
 					PowerUP1.y = -10;
 					if (lastPlayerHit==1)
 					{
-						powerGravityP1 += 1;
+						power_gravityP1 += 1;
 					}
 					if (lastPlayerHit==2)
 					{
-						powerGravityP2 += 1;
+						power_gravityP2 += 1;
 					}
-					powerUPexists = nope;
+					powerUPexists = DoesntExist;
 				}
-				if (CheckCollisionCircleRec(ballPosition, ballRadius, PowerUP2) && powerUP2exists == yeah)
+				if (CheckCollisionCircleRec(ballPosition, ball_radius, PowerUP2) && powerUP2exists == Exists)
 				{
 					PowerUP2.y = -10;
 					invisible = true;
-					invisiTimer = cronometroflo;
+					invisibility_timer = cronometerflo;
 					
-					powerUP2exists = nope;
+					powerUP2exists = DoesntExist;
 				}
-				if(IsKeyPressed(KEY_LEFT_CONTROL)&&powerGravityP1>0)
+				if(IsKeyPressed(KEY_LEFT_CONTROL)&&power_gravityP1>0)
 				{
 					ballSpeed.y *= -1.0f;
-					powerGravityP1 -= 1;
+					power_gravityP1 -= 1;
 				}
-				if (IsKeyPressed(KEY_RIGHT_CONTROL)&&powerGravityP2>0)
+				if (IsKeyPressed(KEY_RIGHT_CONTROL)&&power_gravityP2>0)
 				{
 					ballSpeed.y *= -1.0f;
-					powerGravityP2 -= 1;
+					power_gravityP2 -= 1;
 				}
 
-				if (ballPosition.x + ballRadius >= GetScreenWidth())
+				if (ballPosition.x + ball_radius >= GetScreenWidth())
 				{
 					ballPosition.x = GetScreenWidth()- GetScreenWidth() / 8 ;
 					ballPosition.y = GetScreenHeight() / 2;
-					puntosP1 += 1;
-					puntosTotales += 1;
-					SetTargetFPS(120 + puntosTotales * 5);
-					isColliding2 = true;
-					isColliding = true;
+					pointsP1 += 1;
+					total_points += 1;
+					SetTargetFPS(120 + total_points * 5);
+					colliding2 = true;
+					colliding = true;
 					BallColor = P2color;
 					lastPlayerHit = 2;
 				}
-				if (ballPosition.x - ballRadius == 0)
+				if (ballPosition.x - ball_radius == 0)
 				{
 					ballPosition.x = GetScreenWidth() / 8;
 					ballPosition.y = GetScreenHeight() / 2;
-					puntosP2 += 1;
-					puntosTotales += 1;
-					SetTargetFPS(120 + puntosTotales * 2.5);
-					isColliding = true;
-					isColliding2 = true;
+					pointsP2 += 1;
+					total_points += 1;
+					SetTargetFPS(120 + total_points * 2.5);
+					colliding = true;
+					colliding2 = true;
 					BallColor = P1color;
 					lastPlayerHit = 1;
 				}
 
-				if (IsKeyDown('W') && P1.y > 0) P1.y -= Paleta_speed;
-				if (IsKeyDown('S') && P1.y + P1.height < GetScreenHeight()) P1.y += Paleta_speed;
-				if (IsKeyDown(KEY_UP) && P2.y > 0) P2.y -= Paleta_speed;
-				if (IsKeyDown(KEY_DOWN) && P2.y + P2.height < GetScreenHeight()) P2.y += Paleta_speed;
+				if (IsKeyDown('W') && P1.y > 0) P1.y -= paddle_speed;
+				if (IsKeyDown('S') && P1.y + P1.height < GetScreenHeight()) P1.y += paddle_speed;
+				if (IsKeyDown(KEY_UP) && P2.y > 0) P2.y -= paddle_speed;
+				if (IsKeyDown(KEY_DOWN) && P2.y + P2.height < GetScreenHeight()) P2.y += paddle_speed;
 				ballPosition.x += ballSpeed.x;
 				ballPosition.y += ballSpeed.y;
-				if (!CheckCollisionCircleRec(ballPosition, ballRadius, P1))
+				if (!CheckCollisionCircleRec(ballPosition, ball_radius, P1))
 				{
-					isColliding = false;
+					colliding = false;
 				}
-				if (CheckCollisionCircleRec(ballPosition, ballRadius, P1) && isColliding == false) {
-					isColliding = true;
+				if (CheckCollisionCircleRec(ballPosition, ball_radius, P1) && colliding == false) {
+					colliding = true;
 					if (ballPosition.y < P1.y + P1.height / 2)
 					{
 						if (ballSpeed.y > 0)
 						{
 							ballSpeed.y *= -1.0f;
 						}
-						if (ballSpeed.y < 0)
-						{
-							//no pasa nada
-						}
 					}
 					if (ballPosition.y > P1.y + P1.height / 2)
 					{
-						if (ballSpeed.y > 0)
-						{
-							//no pasa nada
-						}
 						if (ballSpeed.y < 0)
 						{
 							ballSpeed.y *= -1.0f;
@@ -390,29 +382,21 @@ int main(void)
 					BallColor = P1color;
 					lastPlayerHit = 1;
 				}
-				if (!CheckCollisionCircleRec(ballPosition, ballRadius, P2))
+				if (!CheckCollisionCircleRec(ballPosition, ball_radius, P2))
 				{
-					isColliding2 = false;
+					colliding2 = false;
 				}
-				if (CheckCollisionCircleRec(ballPosition, ballRadius, P2) && isColliding2 == false) {
-					isColliding2 = true;
+				if (CheckCollisionCircleRec(ballPosition, ball_radius, P2) && colliding2 == false) {
+					colliding2 = true;
 					if (ballPosition.y < P2.y + P2.height / 2)
 					{
 						if (ballSpeed.y > 0)
 						{
 							ballSpeed.y *= -1.0f;
 						}
-						if (ballSpeed.y < 0)
-						{
-							//no pasa nada
-						}
 					}
 					if (ballPosition.y > P2.y + P2.height / 2)
 					{
-						if (ballSpeed.y > 0)
-						{
-							//no pasa nada
-						}
 						if (ballSpeed.y < 0)
 						{
 							ballSpeed.y *= -1.0f;
@@ -422,15 +406,12 @@ int main(void)
 					BallColor = P2color;
 					lastPlayerHit = 2;
 				}
-				// Check walls collision for bouncing
-				if ((ballPosition.x >= (GetScreenWidth() - ballRadius)) || (ballPosition.x <= ballRadius)) ballSpeed.x *= -1.0f;
-				if ((ballPosition.y >= (GetScreenHeight() - ballRadius)) || (ballPosition.y <= ballRadius)) ballSpeed.y *= -1.0f;
+				
+				if ((ballPosition.x >= (GetScreenWidth() - ball_radius)) || (ballPosition.x <= ball_radius)) ballSpeed.x *= -1.0f;
+				if ((ballPosition.y >= (GetScreenHeight() - ball_radius)) || (ballPosition.y <= ball_radius)) ballSpeed.y *= -1.0f;
 			}
 			else framesCounter++;
-			//-----------------------------------------------------
 
-			// Draw
-			//-----------------------------------------------------
 			BeginDrawing();
 
 			ClearBackground(RAYWHITE);
@@ -438,76 +419,63 @@ int main(void)
 			{
 				DrawTexture(texturaBola, ballPosition.x - 27, ballPosition.y - 17, BallColor);
 			}
-			if (invisible==true&&cronometroflo>=invisiTimer+0.75)
+			if (invisible==true&&cronometerflo>=invisibility_timer+0.75)
 			{
 				invisible = false;
 			}
-			//DrawCircleV(ballPosition, ballRadius, BallColor);
-			//DrawRectangle(P1.x, P1.y, P1.width, P1.height, P1color);
-			//DrawRectangle(P2.x, P2.y, P2.width, P2.height, P2color);
+
 			DrawTexture(texturaBarra, P2.x - 18, P2.y, P2color);
 			DrawTexture(texturaBarra, P1.x - 18, P1.y, P1color);
-			//DrawText("PRESS SPACE to PAUSE BALL MOVEMENT", 10, GetScreenHeight() - 25, 20, LIGHTGRAY);
-			if (powerGravityP1 > 0)DrawCircle(70, 20, 5, BLACK);
-			if (powerGravityP1 > 1)DrawCircle(85, 20, 5, BLACK);
-			if (powerGravityP1 > 2)DrawCircle(100, 20, 5, BLACK);
-			if (powerGravityP1 > 3)DrawCircle(115, 20, 5, BLACK);
-			if (powerGravityP1 > 4)DrawCircle(130, 20, 5, BLACK);
-			if (powerGravityP2 > 0)DrawCircle(655, 20, 5, BLACK);
-			if (powerGravityP2 > 1)DrawCircle(670, 20, 5, BLACK);
-			if (powerGravityP2 > 2)DrawCircle(685, 20, 5, BLACK);
-			if (powerGravityP2 > 3)DrawCircle(700, 20, 5, BLACK);
-			if (powerGravityP2 > 4)DrawCircle(715, 20, 5, BLACK);
+			
+			if (power_gravityP1 > 0)DrawCircle(70, 20, 5, BLACK);
+			if (power_gravityP1 > 1)DrawCircle(85, 20, 5, BLACK);
+			if (power_gravityP1 > 2)DrawCircle(100, 20, 5, BLACK);
+			if (power_gravityP1 > 3)DrawCircle(115, 20, 5, BLACK);
+			if (power_gravityP1 > 4)DrawCircle(130, 20, 5, BLACK);
+			if (power_gravityP2 > 0)DrawCircle(655, 20, 5, BLACK);
+			if (power_gravityP2 > 1)DrawCircle(670, 20, 5, BLACK);
+			if (power_gravityP2 > 2)DrawCircle(685, 20, 5, BLACK);
+			if (power_gravityP2 > 3)DrawCircle(700, 20, 5, BLACK);
+			if (power_gravityP2 > 4)DrawCircle(715, 20, 5, BLACK);
 
-			/*if (cronometro%10==0&&cronometro>0&&powerUPexists==nope)
-			{
-				PowerUP1.y = rand() % GetScreenHeight() + 1;
-				powerUPexists = yes;
-				lastTimer = cronometro;
-			}*/
-			if (cronometro >= lastTimer + 15)
+			if (cronometer >= lastTimer + 15)
 			{
 				PowerUP1.y = rand() % (GetScreenHeight() - 40) + 20;
-				powerUPexists = yeah;
-				lastTimer = cronometro;
+				powerUPexists = Exists;
+				lastTimer = cronometer;
 			}
-			if (cronometro >= lastTimer2 + 15)
+			if (cronometer >= lastTimer2 + 15)
 			{
 				PowerUP2.y = rand() % (GetScreenHeight() - 40) + 20;
-				powerUP2exists = yeah;
-				lastTimer2 = cronometro;
+				powerUP2exists = Exists;
+				lastTimer2 = cronometer;
 			}
-			if (powerUPexists==yeah)
+			if (powerUPexists==Exists)
 			{
-				//DrawRectangle(400, PowerUP1.y, PowerUP1.width, PowerUP1.height, YELLOW);
 				DrawTexture(texturaPowerUP, PowerUP1.x, PowerUP1.y, WHITE);
 			}
-			if (powerUP2exists == yeah)
-			{
-				//DrawRectangle(400, PowerUP2.y, PowerUP2.width, PowerUP2.height, YELLOW);
+			if (powerUP2exists == Exists)
+			{	
 				DrawTexture(texturaPowerUP2, PowerUP2.x, PowerUP2.y, PINK);
 			}
 
-			DrawText(TextFormat("P1: %i", puntosP1), 10, 10, 20, P1color);
-			DrawText(TextFormat("P2: %i", puntosP2), GetScreenWidth() - 70, 10, 20, P2color);
-			// On pause, we draw a blinking message
+			DrawText(TextFormat("P1: %i", pointsP1), 10, 10, 20, P1color);
+			DrawText(TextFormat("P2: %i", pointsP2), GetScreenWidth() - 70, 10, 20, P2color);
+
 			if (pause && ((framesCounter / 30) % 4)) DrawText("PRESS SPACE TO PLAY", 230, 200, 30, BLACK);
 
 			EndDrawing();
-			//-----------------------------------------------------
 		}
 		StopMusicStream(nihaoNyan);
 	}
-	// De-Initialization
-	//---------------------------------------------------------
+
 	UnloadTexture(texturaBola);
 	UnloadTexture(texturaFondo);
 	UnloadTexture(texturaBarra);
 	UnloadMusicStream(gatitos);
 	UnloadMusicStream(metalNyan);
 	CloseAudioDevice();
-	CloseWindow();        // Close window and OpenGL context
-	//----------------------------------------------------------
+	CloseWindow();        
 	
 	return 0;
 }
