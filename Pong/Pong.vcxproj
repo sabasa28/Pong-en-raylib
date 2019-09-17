@@ -130,7 +130,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="background.cpp" />
+    <ClCompile Include="ball.cpp" />
+    <ClCompile Include="console.cpp" />
     <ClCompile Include="ElPong.cpp" />
+    <ClCompile Include="menu.cpp" />
+    <ClCompile Include="musicSounds.cpp" />
+    <ClCompile Include="paddles.cpp" />
+    <ClCompile Include="powerUPs.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="background.h" />
+    <ClInclude Include="ball.h" />
+    <ClInclude Include="console.h" />
+    <ClInclude Include="menu.h" />
+    <ClInclude Include="musicSounds.h" />
+    <ClInclude Include="paddles.h" />
+    <ClInclude Include="powerUPs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

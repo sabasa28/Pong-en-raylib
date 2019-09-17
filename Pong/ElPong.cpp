@@ -1,92 +1,43 @@
 #include <time.h>
 #include "raylib.h"
 #include <stdlib.h>
-
-enum exist
-{
-	Exists,
-	DoesntExist
-}powerUPexists = DoesntExist; powerUP2exists = DoesntExist;
+#include "console.h"
+#include "paddles.h"
+#include "powerUPs.h"
+#include "ball.h"
+#include "background.h"
+#include "musicSounds.h"
 
 int main(void)
 {
-	const int screenWidth = 800;
-	const int screenHeight = 450;
-	int cronometer = (double)clock() / 1000;
-	float cronometerflo = (double)clock() / 1000;
+	initCronometers();
 	srand(time(NULL));
 	InitWindow(screenWidth, screenHeight, "PONG - Inaki Diez Galarza");//(Iñaki)
 	InitAudioDevice();
-	Rectangle PowerUP1;
-	Rectangle PowerUP2;
-	PowerUP1.height = 30;
-	PowerUP2.height = 30;
-	PowerUP1.width = 30;
-	PowerUP2.width = 30;
-	PowerUP1.x = 400;
-	PowerUP1.y = -10;
-	PowerUP2.x = 400;
-	PowerUP2.y = -10;
-	Vector2 ballPosition = { GetScreenWidth() / 2, GetScreenHeight() / 2 };
-	Vector2 ballSpeed = { 3.0f, 3.0f };
-	float paddle_speed = 2.5f;
-	float paddle_height = 60.0f;
-	float paddle_width = 10.0f;
-	int ball_radius = 10;
-	Image mouse1 = LoadImage("imagenes/white_mouse.png");
-	Image mouse2 = LoadImage("imagenes/gray_mouse.png");
-	Image worsted = LoadImage("imagenes/estambre_rojo.png");
-	Image standing_cat = LoadImage("imagenes/cat_standing.png");
-	Image cat_staring = LoadImage("imagenes/fat cat staring.jpg");
-	ImageResize(&mouse2, PowerUP2.width, PowerUP2.height);
-	ImageResize(&mouse1, PowerUP1.width, PowerUP1.height);
-	ImageResize(&standing_cat, paddle_width*4, paddle_height);
-	ImageResize(&cat_staring, screenWidth, screenHeight);
-	ImageResize(&worsted, ball_radius * 4, ball_radius * 4);
-	Texture2D texturaPowerUP2 = LoadTextureFromImage(mouse2);
-	Texture2D texturaPowerUP = LoadTextureFromImage(mouse1);
-	Texture2D texturaFondo = LoadTextureFromImage(cat_staring);
-	Texture2D texturaBarra = LoadTextureFromImage(standing_cat);
-	Texture2D texturaBola = LoadTextureFromImage(worsted);
-	UnloadImage(mouse2);
-	UnloadImage(mouse1);
-	UnloadImage(worsted);
-	UnloadImage(standing_cat);
-	UnloadImage(cat_staring);
-	Music gatitos = LoadMusicStream("sonidos/gatitos_song.ogg");
-	Music metalNyan = LoadMusicStream("sonidos/nyanHype.ogg");
-	Music nihaoNyan = LoadMusicStream("sonidos/NyanNyan_RockVersion.ogg");
-	SetMusicVolume(metalNyan, 0.25);
+	initPaddle();
+	initPaddleTex();
+	initPowerUP();
+	initPowerUPTex();
+	initBall();
+	initBallTex();
+	initBackground();
+	initMusicSounds();
+	
+	//ball
 	bool colliding = false;
 	bool colliding2 = false;
 	int lastPlayerHit = 1;
-	int pointsP1 = 0;
-	int pointsP2 = 0;
-	int total_points = 0;
-	int won_matchesP1 = 0;
-	int won_matchesP2 = 0;
-	Rectangle P1;
-	Rectangle P2;
-	int power_gravityP1 = 3;
-	int power_gravityP2 = 3;
-	P1.height = paddle_height;
-	P1.width = paddle_width;
-	P2.height = paddle_height;
-	P2.width = paddle_width;
-	P1.x = GetScreenWidth() / 8 - 20;
-	P1.y = GetScreenHeight() / 2;
-	P2.x = GetScreenWidth() - GetScreenWidth() / 8 +20;
-	P2.y = GetScreenHeight() / 2;
-	Color P1color = RED;
-	Color P2color = BLUE;
-	Color BallColor = YELLOW;
+
+	//console
 	float FPS = 120;
 	float StartigFPS = FPS;
 	bool pause = 0;
 	int framesCounter = 0;
-	int winner = 1;
+	
 	bool restarted =false;
 	bool menu = true;
+
+	//menu
 	Rectangle PlayButton;
 	PlayButton.x = 180;
 	PlayButton.y = 120;
@@ -134,8 +85,12 @@ int main(void)
 	BlueButton.y = P1_colored_buttons_y;
 	BlueButton2.x = blue_buttons_x;
 	BlueButton2.y = P2_colored_buttons_y;
+
+
 	int lastTimer = 0;
 	int lastTimer2 = 0;
+
+	//ball creo, yo que se, vofi
 	bool invisible = false;
 	float invisibility_timer;
 	
@@ -295,7 +250,7 @@ int main(void)
 			if (IsKeyPressed(KEY_SPACE)) pause = !pause;
 			if (!pause)
 			{
-				if (CheckCollisionCircleRec(ballPosition,ball_radius,PowerUP1)&&powerUPexists==Exists)
+				if (CheckCollisionCircleRec(ballPosition,ball_radius,PowerUP1)&&powerUPexists==true)
 				{
 					PowerUP1.y = -10;
 					if (lastPlayerHit==1)
@@ -306,15 +261,15 @@ int main(void)
 					{
 						power_gravityP2 += 1;
 					}
-					powerUPexists = DoesntExist;
+					powerUPexists = false;
 				}
-				if (CheckCollisionCircleRec(ballPosition, ball_radius, PowerUP2) && powerUP2exists == Exists)
+				if (CheckCollisionCircleRec(ballPosition, ball_radius, PowerUP2) && powerUP2exists == true)
 				{
 					PowerUP2.y = -10;
 					invisible = true;
 					invisibility_timer = cronometerflo;
 					
-					powerUP2exists = DoesntExist;
+					powerUP2exists = false;
 				}
 				if(IsKeyPressed(KEY_LEFT_CONTROL)&&power_gravityP1>0)
 				{
@@ -427,6 +382,8 @@ int main(void)
 			DrawTexture(texturaBarra, P2.x - 18, P2.y, P2color);
 			DrawTexture(texturaBarra, P1.x - 18, P1.y, P1color);
 			
+
+			//ESTO SE PUEDE HACER MUCHO MAS HERMOSO CON UN SWITCH SIN BREAKS
 			if (power_gravityP1 > 0)DrawCircle(70, 20, 5, BLACK);
 			if (power_gravityP1 > 1)DrawCircle(85, 20, 5, BLACK);
 			if (power_gravityP1 > 2)DrawCircle(100, 20, 5, BLACK);
@@ -441,20 +398,20 @@ int main(void)
 			if (cronometer >= lastTimer + 15)
 			{
 				PowerUP1.y = rand() % (GetScreenHeight() - 40) + 20;
-				powerUPexists = Exists;
+				powerUPexists = true;
 				lastTimer = cronometer;
 			}
 			if (cronometer >= lastTimer2 + 15)
 			{
 				PowerUP2.y = rand() % (GetScreenHeight() - 40) + 20;
-				powerUP2exists = Exists;
+				powerUP2exists = true;
 				lastTimer2 = cronometer;
 			}
-			if (powerUPexists==Exists)
+			if (powerUPexists==true)
 			{
 				DrawTexture(texturaPowerUP, PowerUP1.x, PowerUP1.y, WHITE);
 			}
-			if (powerUP2exists == Exists)
+			if (powerUP2exists == true)
 			{	
 				DrawTexture(texturaPowerUP2, PowerUP2.x, PowerUP2.y, PINK);
 			}
