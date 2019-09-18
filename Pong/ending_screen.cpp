@@ -3,8 +3,9 @@
 #include "musicSounds.h"
 #include "paddles.h"
 #include "console.h"
-
-void endScreenUpdate() {
+#include "game.h"
+void endingScreenUpdate() {
+	PlayMusicStream(metalNyan);
 	UpdateMusicStream(metalNyan);
 	if (pointsP1 >= 10)
 	{
@@ -14,18 +15,17 @@ void endScreenUpdate() {
 	{
 		winner = 2;
 	}
-	if (IsKeyPressed('M'))
-	{
-		menu = true;
-		//break; //no estoy en un loop
+	if (IsKeyPressed('M')) {
+		StopMusicStream(metalNyan);
+		gamestate = Menu;
 	}
-	if (IsKeyPressed('R'))
-	{
-		restarted = true;
+	if (IsKeyPressed('R')) {
+		StopMusicStream(metalNyan);
+		gamestate = Gameplay;
 	}
 }
 
-void endScreenDraw() {
+void endingScreenDraw() {
 	BeginDrawing();
 	ClearBackground(RAYWHITE);
 	DrawText(TextFormat("PLAYER %i", winner), 180, 110, 50, BLACK);

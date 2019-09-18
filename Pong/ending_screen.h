@@ -1,1 +1,2 @@
-void endScreenDraw();
+void endingScreenUpdate();
+void endingScreenDraw();
