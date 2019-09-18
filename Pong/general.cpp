@@ -5,6 +5,8 @@
 #include "paddles.h"
 #include "powerUPs.h"
 #include "ball.h"
+#include "musicSounds.h"
+#include "background.h"
 
 void resetValues() { //CAMBIAR LO DEL AUMENTO FPS A AUMENTO DE VELOCIDAD DE PELOTA Y PALETAS
 
@@ -32,4 +34,14 @@ void resetValues() { //CAMBIAR LO DEL AUMENTO FPS A AUMENTO DE VELOCIDAD DE PELO
 	cronometerflo = (double)clock() / 1000;
 	lastTimer = cronometer;
 	lastTimer2 = cronometer;
+}
+
+void close() {
+	UnloadTexture(texturaBola);
+	UnloadTexture(texturaFondo);
+	UnloadTexture(texturaBarra);
+	UnloadMusicStream(gatitos);
+	UnloadMusicStream(metalNyan);
+	CloseAudioDevice();
+	CloseWindow();
 }

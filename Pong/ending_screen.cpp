@@ -7,11 +7,11 @@
 void endingScreenUpdate() {
 	PlayMusicStream(metalNyan);
 	UpdateMusicStream(metalNyan);
-	if (pointsP1 >= 10)
+	if (pointsP1 >= winning_points)
 	{
 		winner = 1;
 	}
-	else if (pointsP2 >= 10)
+	else if (pointsP2 >= winning_points)
 	{
 		winner = 2;
 	}

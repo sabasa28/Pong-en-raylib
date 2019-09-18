@@ -17,6 +17,7 @@ int power_gravityP1 = 3;
 int power_gravityP2 = 3;
 Color P1color;
 Color P2color;
+int winning_points = 10;
 
 void initPaddle() {
 P1.height = paddle_height;

@@ -28,6 +28,6 @@ void initGeneral() {
 	initBackground();
 	initMusicSounds();
 	initFPS();
-	initMenu();
+	menuInit();
 	gamestate = Menu;
 }

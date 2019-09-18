@@ -18,3 +18,4 @@ extern int power_gravityP1;
 extern int power_gravityP2;
 extern Color P1color;
 extern Color P2color;
+extern int winning_points;
