@@ -8,6 +8,9 @@ Image mouse1;
 Image mouse2;
 Texture2D texturaPowerUP;
 Texture2D texturaPowerUP2;
+int lastTimer = 0;
+int lastTimer2 = 0;
+
 void initPowerUP() {
 	PowerUP1.height = 30;
 	PowerUP2.height = 30;

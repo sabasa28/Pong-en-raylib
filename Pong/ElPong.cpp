@@ -7,6 +7,12 @@
 #include "ball.h"
 #include "background.h"
 #include "musicSounds.h"
+#include "menu.h"
+void resetValues();//mover a algun otro lado
+
+//FALTA ORGANIZAR EL MAIN, LAS FUNCIONES DENTRO DEL MAIN TIENEN QUE SER POR EJ EL UPDATE QUE TIENE ADENTO EL UPDATE DEL MENU, GAMEPLAY
+//Y PANTALLA FINAL O SON VARIOS UPDATES?? O ES UNA FUNCION "MENU" CON UPDATE, DRAW, CLOSE, ETC Y OTRA ASI PARA PLAY??? 
+
 
 int main(void)
 {
@@ -22,81 +28,11 @@ int main(void)
 	initBallTex();
 	initBackground();
 	initMusicSounds();
-	
-	//ball
-	bool colliding = false;
-	bool colliding2 = false;
-	int lastPlayerHit = 1;
+	initFPS();
+	initMenuButtons();
 
-	//console
-	float FPS = 120;
-	float StartigFPS = FPS;
-	bool pause = 0;
-	int framesCounter = 0;
-	
-	bool restarted =false;
-	bool menu = true;
-
-	//menu
-	Rectangle PlayButton;
-	PlayButton.x = 180;
-	PlayButton.y = 120;
-	PlayButton.width = 400;
-	PlayButton.height = 100;
-	Rectangle ExitButton;
-	ExitButton.x = 230;
-	ExitButton.y = 240;
-	ExitButton.width = 300;
-	ExitButton.height = 80;
-	Rectangle RedButton;
-	Rectangle GreenButton;
-	Rectangle BlueButton;
-	Rectangle RedButton2;
-	Rectangle GreenButton2;
-	Rectangle BlueButton2;
-	int coloredbuttons_height = 30;
-	int coloredbuttons_width = 100;
-	RedButton.width = coloredbuttons_width;
-	RedButton.height = coloredbuttons_height;
-	RedButton2.width = coloredbuttons_width;
-	RedButton2.height = coloredbuttons_height;
-	GreenButton.width = coloredbuttons_width;
-	GreenButton.height = coloredbuttons_height;
-	GreenButton2.width = coloredbuttons_width;
-	GreenButton2.height = coloredbuttons_height;
-	BlueButton.width = coloredbuttons_width;
-	BlueButton.height = coloredbuttons_height;
-	BlueButton2.width = coloredbuttons_width;
-	BlueButton2.height = coloredbuttons_height;
-	int P1_colored_buttons_y = 350;
-	int P2_colored_buttons_y = 400;
-	int red_buttons_x = 250;
-	int green_buttons_x = 350;
-	int blue_buttons_x = 450;
-	RedButton.x = red_buttons_x;
-	RedButton.y = P1_colored_buttons_y;
-	RedButton2.x = red_buttons_x;
-	RedButton2.y = P2_colored_buttons_y;
-	GreenButton.x = green_buttons_x;
-	GreenButton.y = P1_colored_buttons_y;
-	GreenButton2.x = green_buttons_x;
-	GreenButton2.y = P2_colored_buttons_y;
-	BlueButton.x = blue_buttons_x;
-	BlueButton.y = P1_colored_buttons_y;
-	BlueButton2.x = blue_buttons_x;
-	BlueButton2.y = P2_colored_buttons_y;
-
-
-	int lastTimer = 0;
-	int lastTimer2 = 0;
-
-	//ball creo, yo que se, vofi
-	bool invisible = false;
-	float invisibility_timer;
-	
 	while (!WindowShouldClose())
 	{
-		
 		if (restarted == true)
 		{
 			PlayMusicStream(metalNyan);
@@ -207,29 +143,7 @@ int main(void)
 			StopMusicStream(gatitos);
 		}
 
-		ballPosition.x = GetScreenWidth() / 2;
-		ballPosition.y = GetScreenHeight() / 2;
-		colliding = false;
-		colliding2 = false;
-		pointsP1 = 0;
-		pointsP2 = 0;
-		total_points = 0;
-		P1.x = GetScreenWidth() / 8 -20;
-		P1.y = GetScreenHeight() / 2;
-		P2.x = GetScreenWidth() - GetScreenWidth() / 8 + 20;
-		P2.y = GetScreenHeight() / 2;
-		FPS = 120;
-		StartigFPS = FPS;
-		pause = true;
-		framesCounter = 0;
-		power_gravityP1 = 3;
-		power_gravityP2 = 3;
-		SetTargetFPS(FPS);
-		PlayMusicStream(nihaoNyan);
-		cronometer = (double)clock() / 1000;
-		cronometerflo = (double)clock() / 1000;
-		lastTimer = cronometer;
-		lastTimer2 = cronometer;
+		resetValues();
 		while (!WindowShouldClose())   
 		{
 			UpdateMusicStream(nihaoNyan);
@@ -435,4 +349,32 @@ int main(void)
 	CloseWindow();        
 	
 	return 0;
+}
+
+void resetValues() {
+	ballPosition.x = GetScreenWidth() / 2;
+	ballPosition.y = GetScreenHeight() / 2;
+	colliding = false;
+	colliding2 = false;
+	pointsP1 = 0;
+	pointsP2 = 0;
+	total_points = 0;
+	P1.x = GetScreenWidth() / 8 - 20;
+	P1.y = GetScreenHeight() / 2;
+	P2.x = GetScreenWidth() - GetScreenWidth() / 8 + 20;
+	P2.y = GetScreenHeight() / 2;
+	FPS = 120;
+	StartigFPS = FPS;
+	pause = true;
+	framesCounter = 0;
+	powerUPexists = false;
+	powerUP2exists = false;
+	power_gravityP1 = 3;
+	power_gravityP2 = 3;
+	SetTargetFPS(FPS);
+	PlayMusicStream(nihaoNyan);
+	cronometer = (double)clock() / 1000;
+	cronometerflo = (double)clock() / 1000;
+	lastTimer = cronometer;
+	lastTimer2 = cronometer;
 }

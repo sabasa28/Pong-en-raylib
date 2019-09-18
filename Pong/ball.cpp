@@ -6,6 +6,11 @@ int ball_radius;
 Color BallColor;
 Image worsted;
 Texture2D texturaBola;
+bool colliding = false;
+bool colliding2 = false;
+int lastPlayerHit = 1;
+bool invisible = false;
+float invisibility_timer=1;
 void initBall() {
 	ballPosition.x = GetScreenWidth() / 2;
 	ballPosition.y = GetScreenHeight() / 2;
