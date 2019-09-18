@@ -8,14 +8,26 @@
 #include "background.h"
 #include "musicSounds.h"
 #include "menu.h"
+#include "ending_screen.h"
+#include "game.h"
 void resetValues();//mover a algun otro lado
 
 //FALTA ORGANIZAR EL MAIN, LAS FUNCIONES DENTRO DEL MAIN TIENEN QUE SER POR EJ EL UPDATE QUE TIENE ADENTO EL UPDATE DEL MENU, GAMEPLAY
 //Y PANTALLA FINAL O SON VARIOS UPDATES?? O ES UNA FUNCION "MENU" CON UPDATE, DRAW, CLOSE, ETC Y OTRA ASI PARA PLAY??? 
 
 
-int main(void)
+void main()
 {
+	/*switch (gamestate)
+	{
+	case Gameplay:
+
+	default:
+		break;
+	}*/
+	//HACER ALGO CON EL ENUM ESTE, AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	
+	//------------------ futura funcion INIT ---------------------------------
 	initCronometers();
 	srand(time(NULL));
 	InitWindow(screenWidth, screenHeight, "PONG - Inaki Diez Galarza");//(Iñaki)
@@ -29,8 +41,8 @@ int main(void)
 	initBackground();
 	initMusicSounds();
 	initFPS();
-	initMenuButtons();
-
+	initMenu();
+	//---------------------------------------------------------------------------
 	while (!WindowShouldClose())
 	{
 		if (restarted == true)
@@ -39,8 +51,6 @@ int main(void)
 			while (!IsKeyPressed('R')&&!WindowShouldClose())
 			{
 				UpdateMusicStream(metalNyan);
-				BeginDrawing();
-				ClearBackground(RAYWHITE);
 				if (pointsP1 >= 10)
 				{
 					winner = 1;
@@ -49,23 +59,16 @@ int main(void)
 				{
 					winner = 2;
 				}
-				DrawText(TextFormat("PLAYER %i", winner), 180, 110, 50, BLACK);
-				DrawText("WINS.", 450, 110, 50, BLACK);
-				DrawText("Press 'R' to play again.", 80, 250, 30, BLACK);
-				DrawText("Press 'M' to go to menu.", 80, 290, 30, BLACK);
-				DrawText("Press 'ESC' to quit.", 80, 330, 30, BLACK);
-				DrawText(TextFormat("Won matches P1: %i", won_matchesP1), 500, 330, 20, P1color);
-				DrawText(TextFormat("Won matches P2: %i", won_matchesP2), 500, 360, 20, P2color);
 				if (IsKeyPressed('M'))
 				{
 					menu = true;
-					break;
+					break; //no estoy en un loop
 				}
 				if (IsKeyPressed('R'))
 				{
 					restarted = true;
 				}
-				EndDrawing();
+				endScreenDraw();
 			}
 			StopMusicStream(metalNyan);
 		}
@@ -347,8 +350,7 @@ int main(void)
 	UnloadMusicStream(metalNyan);
 	CloseAudioDevice();
 	CloseWindow();        
-	
-	return 0;
+
 }
 
 void resetValues() {

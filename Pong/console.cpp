@@ -9,7 +9,7 @@ float FPS = 120;
 bool pause = 0;
 int framesCounter = 0;
 float StartigFPS;
-bool restarted = false;
+bool restarted = true;
 bool menu = true;
 
 void initCronometers() {

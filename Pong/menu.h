@@ -14,4 +14,4 @@ extern int P2_colored_buttons_y;
 extern int red_buttons_x;
 extern int green_buttons_x;
 extern int blue_buttons_x;
-void initMenuButtons();
+void initMenu();

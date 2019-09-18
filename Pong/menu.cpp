@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "menu.h"
+
 Rectangle PlayButton;
 Rectangle ExitButton;
 Rectangle RedButton;
@@ -16,7 +17,7 @@ int red_buttons_x = 250;
 int green_buttons_x = 350;
 int blue_buttons_x = 450;
 
-void initMenuButtons() {
+void initMenu() {
 	PlayButton.x = 180;
 	PlayButton.y = 120;
 	PlayButton.width = 400;
