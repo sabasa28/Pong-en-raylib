@@ -1,5 +1,6 @@
 #include "general.h"
 #include <time.h>
+#include <stdlib.h>
 #include "raylib.h"
 #include "console.h"
 #include "paddles.h"
@@ -7,6 +8,26 @@
 #include "ball.h"
 #include "musicSounds.h"
 #include "background.h"
+#include "menu.h"
+#include "game.h"
+
+void initGeneral() {
+	initCronometers();
+	srand(time(NULL));
+	InitWindow(screenWidth, screenHeight, "PONG - Inaki Diez Galarza");//(Iñaki)
+	InitAudioDevice();
+	initPaddle();
+	initPaddleTex();
+	initPowerUP();
+	initPowerUPTex();
+	initBall();
+	initBallTex();
+	initBackground();
+	initMusicSounds();
+	initFPS();
+	menuInit();
+	gamestate = Menu;
+}
 
 void resetValues() { //CAMBIAR LO DEL AUMENTO FPS A AUMENTO DE VELOCIDAD DE PELOTA Y PALETAS
 

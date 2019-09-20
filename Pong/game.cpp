@@ -1,33 +1,43 @@
 #include <stdlib.h>
 #include <time.h>
-#include "raylib.h"
 #include "game.h"
-#include "console.h"
-#include "paddles.h"
-#include "powerUPs.h"
-#include "ball.h"
-#include "background.h"
-#include "musicSounds.h"
 #include "menu.h"
 #include "ending_screen.h"
+#include "general.h"
+#include "gameplay.h"
+//#include "console.h"
+//#include "paddles.h"
+//#include "powerUPs.h"
+//#include "ball.h"
+//#include "background.h"
+//#include "musicSounds.h"
 
 //enum state;
 state gamestate;
 
-void initGeneral() {
-	initCronometers();
-	srand(time(NULL));
-	InitWindow(screenWidth, screenHeight, "PONG - Inaki Diez Galarza");//(Iñaki)
-	InitAudioDevice();
-	initPaddle();
-	initPaddleTex();
-	initPowerUP();
-	initPowerUPTex();
-	initBall();
-	initBallTex();
-	initBackground();
-	initMusicSounds();
-	initFPS();
-	menuInit();
-	gamestate = Menu;
+void executeGame(){
+	initGeneral();
+	while (!WindowShouldClose() && gamestate != Close)
+	{
+		switch (gamestate)
+		{
+		case Menu:
+			menuUpdate();
+			menuDraw();
+			resetValues();
+			break;
+
+		case Gameplay:
+			gameplayUpdate();
+			gameplayDraw();
+			break;
+
+		case EndScreen:
+			endingScreenUpdate();
+			endingScreenDraw();
+			resetValues();
+			break;
+		}
+	}
+	close();
 }
