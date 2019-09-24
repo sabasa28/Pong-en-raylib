@@ -1,5 +1,7 @@
-#include "raylib.h"
 #include "powerUPs.h"
+
+#include "raylib.h"
+
 Rectangle PowerUP1;
 Rectangle PowerUP2;
 bool powerUPexists = false;

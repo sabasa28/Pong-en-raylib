@@ -1,35 +1,29 @@
-#include "raylib.h"
 #include "paddles.h"
-float paddle_speed = 2.5f;
+
+#include "raylib.h"
+
+Player player1;
+Player player2;
+float paddle_speed = 300.0f;
 float paddle_height = 60.0f;
 float paddle_width = 10.0f;
-Rectangle P1;
-Rectangle P2;
-int pointsP1 = 0;
-int pointsP2 = 0;
 int winner = 1;
 Texture2D texturaBarra;
 Image standing_cat;
 int total_points = 0;
-int won_matchesP1 = 0;
-int won_matchesP2 = 0;
-int power_gravityP1 = 3;
-int power_gravityP2 = 3;
-Color P1color;
-Color P2color;
 int winning_points = 10;
 
 void initPaddle() {
-P1.height = paddle_height;
-P1.width = paddle_width;
-P2.height = paddle_height;
-P2.width = paddle_width;
-P1.x = GetScreenWidth() / 8 - 20;
-P1.y = GetScreenHeight() / 2;
-P2.x = GetScreenWidth() - GetScreenWidth() / 8 + 20;
-P2.y = GetScreenHeight() / 2;
-P1color = RED;
-P2color = BLUE;
+player1.bar.height = paddle_height;
+player1.bar.width = paddle_width;
+player2.bar.height = paddle_height;
+player2.bar.width = paddle_width;
+player1.bar.x = GetScreenWidth() / 8 - 20;
+player1.bar.y = GetScreenHeight() / 2;
+player2.bar.x = GetScreenWidth() - GetScreenWidth() / 8 + 20;
+player2.bar.y = GetScreenHeight() / 2;
+player1.color = RED;
+player2.color = BLUE;
 }
 
 void initPaddleTex() {

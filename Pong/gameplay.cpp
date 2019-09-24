@@ -1,7 +1,10 @@
 #include "gameplay.h"
+
 #include <stdlib.h>
 #include <time.h>
+
 #include "raylib.h"
+
 #include "powerUPs.h"
 #include "paddles.h"
 #include "console.h"
@@ -9,135 +12,136 @@
 #include "musicSounds.h"
 #include "game.h"
 #include "background.h"
-void gameplayUpdate() {
+#include "general.h"
+
+void updateGameplay() {
 	PlayMusicStream(nihaoNyan);
 	UpdateMusicStream(nihaoNyan);
 	DrawTexture(texturaFondo, 0, 0, WHITE);
 	cronometer = (double)clock() / 1000;
-	cronometerflo = (double)clock() / 1000;
-	if (pointsP1 >= winning_points)
+	cronometerFlo = (double)clock() / 1000;
+	if (player1.points >= winning_points)
 	{
-		won_matchesP1 += 1;
+		player1.wonMatches += 1;
 		StopMusicStream(nihaoNyan);
 		gamestate = EndScreen;
 	}
-	if (pointsP2 >= winning_points)
+	if (player2.points >= winning_points)
 	{
-		won_matchesP2 += 1;
+		player2.wonMatches += 1;
 		StopMusicStream(nihaoNyan);
 		gamestate = EndScreen;
 	}
 	if (IsKeyPressed(KEY_SPACE)) pause = !pause;
 	if (!pause)
 	{
-		if (CheckCollisionCircleRec(ballPosition, ball_radius, PowerUP1) && powerUPexists == true)
+		if (CheckCollisionCircleRec(ball.position, ball.radius, PowerUP1) && powerUPexists == true)
 		{
-			PowerUP1.y = -10;
-			if (lastPlayerHit == 1)
+			if (ball.lastPlayerHit == 1)
 			{
-				power_gravityP1 += 1;
+				player1.gravityPills += 1;
 			}
-			if (lastPlayerHit == 2)
+			if (ball.lastPlayerHit == 2)
 			{
-				power_gravityP2 += 1;
+				player2.gravityPills += 1;
 			}
 			powerUPexists = false;
 		}
-		if (CheckCollisionCircleRec(ballPosition, ball_radius, PowerUP2) && powerUP2exists == true)
+		if (CheckCollisionCircleRec(ball.position, ball.radius, PowerUP2) && powerUP2exists == true)
 		{
-			PowerUP2.y = -10;
-			invisible = true;
-			invisibility_timer = cronometerflo;
-
+			ball.invisibility = true;
+			ball.invisibilityTimer = cronometerFlo;
 			powerUP2exists = false;
 		}
-		if (IsKeyPressed(KEY_LEFT_CONTROL) && power_gravityP1 > 0)
+		if (IsKeyPressed(KEY_LEFT_CONTROL) && player1.gravityPills > 0)
 		{
-			ballSpeed.y *= -1.0f;
-			power_gravityP1 -= 1;
+			ball.speed.y *= -1.0f ;
+			player1.gravityPills -= 1;
 		}
-		if (IsKeyPressed(KEY_RIGHT_CONTROL) && power_gravityP2 > 0)
+		if (IsKeyPressed(KEY_RIGHT_CONTROL) && player2.gravityPills > 0)
 		{
-			ballSpeed.y *= -1.0f;
-			power_gravityP2 -= 1;
+			ball.speed.y *= -1.0f;
+			player2.gravityPills -= 1;
 		}
-		if (ballPosition.x + ball_radius >= GetScreenWidth())
+		if (ball.position.x + ball.radius >= GetScreenWidth())
 		{
-			ballPosition.x = GetScreenWidth() - GetScreenWidth() / 8;
-			ballPosition.y = GetScreenHeight() / 2;
-			pointsP1 += 1;
+			ball.speed.x*=-1.0f;
+			ball.position.x = GetScreenWidth() - GetScreenWidth() / 8;
+			ball.position.y = GetScreenHeight() / 2;
+			player1.points += 1;
 			total_points += 1;
-			SetTargetFPS(120 + total_points * 5);
+			speedMultiplier += 0.05;
 			colliding2 = true;
 			colliding = true;
-			BallColor = P2color;
-			lastPlayerHit = 2;
+			ball.color = player2.color;
+			ball.lastPlayerHit = 2;
 		}
-		if (ballPosition.x - ball_radius == 0)
+		if (ball.position.x - ball.radius <= 0)
 		{
-			ballPosition.x = GetScreenWidth() / 8;
-			ballPosition.y = GetScreenHeight() / 2;
-			pointsP2 += 1;
+			ball.speed.x *= -1.0f;
+			ball.position.x = GetScreenWidth() / 8;
+			ball.position.y = GetScreenHeight() / 2;
+			player2.points += 1;
 			total_points += 1;
-			SetTargetFPS(120 + total_points * 2.5);
+			speedMultiplier += 0.05;
 			colliding = true;
 			colliding2 = true;
-			BallColor = P1color;
-			lastPlayerHit = 1;
+			ball.color = player1.color;
+			ball.lastPlayerHit = 1;
 		}
-		if (IsKeyDown('W') && P1.y > 0) P1.y -= paddle_speed;
-		if (IsKeyDown('S') && P1.y + P1.height < GetScreenHeight()) P1.y += paddle_speed;
-		if (IsKeyDown(KEY_UP) && P2.y > 0) P2.y -= paddle_speed;
-		if (IsKeyDown(KEY_DOWN) && P2.y + P2.height < GetScreenHeight()) P2.y += paddle_speed;
-		ballPosition.x += ballSpeed.x;
-		ballPosition.y += ballSpeed.y;
-		if (!CheckCollisionCircleRec(ballPosition, ball_radius, P1))
+		if (IsKeyDown('W') && player1.bar.y > 0) player1.bar.y -= player1.speed * GetFrameTime() *speedMultiplier;
+		if (IsKeyDown('S') && player1.bar.y + player1.bar.height < GetScreenHeight()) player1.bar.y += player1.speed * GetFrameTime()*speedMultiplier;
+		if (IsKeyDown(KEY_UP) && player2.bar.y > 0) player2.bar.y -= player2.speed * GetFrameTime()*speedMultiplier;
+		if (IsKeyDown(KEY_DOWN) && player2.bar.y + player2.bar.height < GetScreenHeight()) player2.bar.y += player2.speed * GetFrameTime()*speedMultiplier;
+		ball.position.x += ball.speed.x*GetFrameTime()*speedMultiplier;
+		ball.position.y += ball.speed.y*GetFrameTime()*speedMultiplier;
+		if (!CheckCollisionCircleRec(ball.position, ball.radius, player1.bar))
 		{
 			colliding = false;
 		}
-		if (CheckCollisionCircleRec(ballPosition, ball_radius, P1) && colliding == false) {
+		if (CheckCollisionCircleRec(ball.position, ball.radius, player1.bar) && colliding == false) {
 			colliding = true;
-			if (ballPosition.y < P1.y + P1.height / 2)
+			if (ball.position.y < player1.bar.y + player1.bar.height / 2)
 			{
-				if (ballSpeed.y > 0)
+				if (ball.speed.y > 0)
 				{
-					ballSpeed.y *= -1.0f;
+					ball.speed.y *= -1.0f;
 				}
 			}
-			if (ballPosition.y > P1.y + P1.height / 2)
+			if (ball.position.y > player1.bar.y + player1.bar.height / 2)
 			{
-				if (ballSpeed.y < 0)
+				if (ball.speed.y < 0)
 				{
-					ballSpeed.y *= -1.0f;
+					ball.speed.y *= -1.0f;
 				}
 			}
-			ballSpeed.x *= -1.0f;
-			BallColor = P1color;
-			lastPlayerHit = 1;
+			ball.speed.x *= -1.0f;
+			ball.color = player1.color;
+			ball.lastPlayerHit = 1;
 		}
-		if (!CheckCollisionCircleRec(ballPosition, ball_radius, P2))
+		if (!CheckCollisionCircleRec(ball.position, ball.radius, player2.bar))
 		{
 			colliding2 = false;
 		}
-		if (CheckCollisionCircleRec(ballPosition, ball_radius, P2) && colliding2 == false) {
+		if (CheckCollisionCircleRec(ball.position, ball.radius, player2.bar) && colliding2 == false) {
 			colliding2 = true;
-			if (ballPosition.y < P2.y + P2.height / 2)
+			if (ball.position.y < player2.bar.y + player2.bar.height / 2)
 			{
-				if (ballSpeed.y > 0)
+				if (ball.speed.y > 0)
 				{
-					ballSpeed.y *= -1.0f;
+					ball.speed.y *= -1.0f;
 				}
 			}
-			if (ballPosition.y > P2.y + P2.height / 2)
+			if (ball.position.y > player2.bar.y + player2.bar.height / 2)
 			{
-				if (ballSpeed.y < 0)
+				if (ball.speed.y < 0)
 				{
-					ballSpeed.y *= -1.0f;
+					ball.speed.y *= -1.0f;
 				}
 			}
-			ballSpeed.x *= -1.0f;
-			BallColor = P2color;
-			lastPlayerHit = 2;
+			ball.speed.x *= -1.0f;
+			ball.color = player2.color;
+			ball.lastPlayerHit = 2;
 		}
 
 		if (cronometer >= lastTimer + 15)
@@ -152,16 +156,15 @@ void gameplayUpdate() {
 			powerUP2exists = true;
 			lastTimer2 = cronometer;
 		}
-		if ((ballPosition.x >= (GetScreenWidth() - ball_radius)) || (ballPosition.x <= ball_radius)) ballSpeed.x *= -1.0f;
-		if ((ballPosition.y >= (GetScreenHeight() - ball_radius)) || (ballPosition.y <= ball_radius)) ballSpeed.y *= -1.0f;
+		if ((ball.position.y >= (GetScreenHeight() - ball.radius)) || (ball.position.y <= ball.radius)) ball.speed.y *= -1.0f;
 	}
 	else framesCounter++;
 }
-void gameplayDraw() {
+void drawGameplay() {
 	BeginDrawing();
 	ClearBackground(RAYWHITE);
 
-	switch (power_gravityP1)
+	switch (player1.gravityPills)
 	{
 	default:
 	case 5:DrawCircle(130, 20, 5, BLACK);
@@ -171,7 +174,7 @@ void gameplayDraw() {
 	case 1:DrawCircle(70, 20, 5, BLACK);
 	case 0:break;
 	}
-	switch (power_gravityP2)
+	switch (player2.gravityPills)
 	{
 	default:
 	case 5:DrawCircle(655, 20, 5, BLACK);
@@ -191,18 +194,18 @@ void gameplayDraw() {
 	{
 		DrawTexture(texturaPowerUP2, PowerUP2.x, PowerUP2.y, PINK);
 	}
-	if (invisible == false)
+	if (ball.invisibility == false)
 	{
-		DrawTexture(texturaBola, ballPosition.x - 27, ballPosition.y - 17, BallColor);
+		DrawTexture(ballTexture, ball.position.x - 27, ball.position.y - 17, ball.color);
 	}
-	if (invisible == true && cronometerflo >= invisibility_timer + 0.75)
+	if (ball.invisibility == true && cronometerFlo >= ball.invisibilityTimer + 0.75)
 	{
-		invisible = false;
+		ball.invisibility = false;
 	}
-	DrawTexture(texturaBarra, P2.x - 18, P2.y, P2color);
-	DrawTexture(texturaBarra, P1.x - 18, P1.y, P1color);
-	DrawText(TextFormat("P1: %i", pointsP1), 10, 10, 20, P1color);
-	DrawText(TextFormat("P2: %i", pointsP2), GetScreenWidth() - 70, 10, 20, P2color);
+	DrawTexture(texturaBarra, player2.bar.x - 18, player2.bar.y, player2.color);
+	DrawTexture(texturaBarra, player1.bar.x - 18, player1.bar.y, player1.color);
+	DrawText(TextFormat("P1: %i", player1.points), 10, 10, 20, player1.color);
+	DrawText(TextFormat("P2: %i", player2.points), GetScreenWidth() - 70, 10, 20, player2.color);
 	if (pause && ((framesCounter / 30) % 4)) DrawText("PRESS SPACE TO PLAY", 230, 200, 30, BLACK);
 	EndDrawing();
 }

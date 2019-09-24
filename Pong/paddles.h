@@ -1,21 +1,22 @@
 #include "raylib.h"
-extern float paddle_speed;
+
+struct Player
+{
+	float speed = 300.0f;
+	int points = 0;
+	int wonMatches = 0;
+	int gravityPills = 3;
+	Color color;
+	Rectangle bar;
+};
+extern Player player1;
+extern Player player2;
 extern float paddle_height;
 extern float paddle_width;
-extern Texture2D texturaBarra;
+extern Texture2D texturaBarra; //agregar a struct?
 extern Image standing_cat;
-extern Rectangle P1;
-extern Rectangle P2;
-extern int pointsP1;
-extern int pointsP2;
 extern int winner;
 extern void initPaddle();
 extern void initPaddleTex();
 extern int total_points;
-extern int won_matchesP1;
-extern int won_matchesP2;
-extern int power_gravityP1;
-extern int power_gravityP2;
-extern Color P1color;
-extern Color P2color;
 extern int winning_points;

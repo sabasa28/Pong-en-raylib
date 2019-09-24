@@ -1,5 +1,7 @@
-#include "raylib.h"
 #include "menu.h"
+
+#include "raylib.h"
+
 #include "background.h"
 #include "game.h"
 #include "paddles.h"
@@ -21,7 +23,7 @@ int red_buttons_x = 250;
 int green_buttons_x = 350;
 int blue_buttons_x = 450;
 
-void menuInit() {
+void initMenu() {
 	PlayButton.x = 180;
 	PlayButton.y = 120;
 	PlayButton.width = 400;
@@ -55,52 +57,52 @@ void menuInit() {
 	BlueButton2.x = blue_buttons_x;
 	BlueButton2.y = P2_colored_buttons_y;
 }
-void menuUpdate() {
+void updateMenu() {
 	PlayMusicStream(gatitos);
 	UpdateMusicStream(gatitos);
-	won_matchesP1 = 0;
-	won_matchesP2 = 0;
+	player1.wonMatches = 0;
+	player2.wonMatches = 0;
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), RedButton))
 	{
 		RedButton.y = P1_colored_buttons_y - 10;
 		BlueButton.y = P1_colored_buttons_y;
 		GreenButton.y = P1_colored_buttons_y;
-		P1color = RED;
+		player1.color = RED;
 	}
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), GreenButton))
 	{
 		RedButton.y = P1_colored_buttons_y;
 		BlueButton.y = P1_colored_buttons_y;
 		GreenButton.y = P1_colored_buttons_y - 10;
-		P1color = GREEN;
+		player1.color = GREEN;
 	}
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), BlueButton))
 	{
 		RedButton.y = P1_colored_buttons_y;
 		BlueButton.y = P1_colored_buttons_y - 10;
 		GreenButton.y = P1_colored_buttons_y;
-		P1color = BLUE;
+		player1.color = BLUE;
 	}
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), RedButton2))
 	{
 		RedButton2.y = P2_colored_buttons_y - 10;
 		BlueButton2.y = P2_colored_buttons_y;
 		GreenButton2.y = P2_colored_buttons_y;
-		P2color = RED;
+		player2.color = RED;
 	}
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), GreenButton2))
 	{
 		RedButton2.y = P2_colored_buttons_y;
 		BlueButton2.y = P2_colored_buttons_y;
 		GreenButton2.y = P2_colored_buttons_y - 10;
-		P2color = GREEN;
+		player2.color = GREEN;
 	}
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), BlueButton2))
 	{
 		RedButton2.y = P2_colored_buttons_y;
 		BlueButton2.y = P2_colored_buttons_y - 10;
 		GreenButton2.y = P2_colored_buttons_y;
-		P2color = BLUE;
+		player2.color = BLUE;
 	}
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), ExitButton)) gamestate = Close;
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), PlayButton)) {
@@ -108,7 +110,7 @@ void menuUpdate() {
 		gamestate = Gameplay;
 	}
 }
-void menuDraw() {
+void drawMenu() {
 	BeginDrawing();
 	ClearBackground(RAYWHITE);
 	DrawTexture(texturaFondo, 0, 0, WHITE);

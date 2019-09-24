@@ -1,17 +1,20 @@
 #include "ending_screen.h"
+
 #include "raylib.h"
+
 #include "musicSounds.h"
 #include "paddles.h"
 #include "console.h"
 #include "game.h"
-void endingScreenUpdate() {
+
+void updateEndingScreen() {
 	PlayMusicStream(metalNyan);
 	UpdateMusicStream(metalNyan);
-	if (pointsP1 >= winning_points)
+	if (player1.points >= winning_points)
 	{
 		winner = 1;
 	}
-	else if (pointsP2 >= winning_points)
+	else if (player2.points >= winning_points)
 	{
 		winner = 2;
 	}
@@ -25,7 +28,7 @@ void endingScreenUpdate() {
 	}
 }
 
-void endingScreenDraw() {
+void drawEndingScreen() {
 	BeginDrawing();
 	ClearBackground(RAYWHITE);
 	DrawText(TextFormat("PLAYER %i", winner), 180, 110, 50, BLACK);
@@ -33,7 +36,7 @@ void endingScreenDraw() {
 	DrawText("Press 'R' to play again.", 80, 250, 30, BLACK);
 	DrawText("Press 'M' to go to menu.", 80, 290, 30, BLACK);
 	DrawText("Press 'ESC' to quit.", 80, 330, 30, BLACK);
-	DrawText(TextFormat("Won matches P1: %i", won_matchesP1), 500, 330, 20, P1color);
-	DrawText(TextFormat("Won matches P2: %i", won_matchesP2), 500, 360, 20, P2color);
+	DrawText(TextFormat("Won matches P1: %i", player1.wonMatches), 500, 330, 20, player1.color);
+	DrawText(TextFormat("Won matches P2: %i", player2.wonMatches), 500, 360, 20, player2.color);
 	EndDrawing();
 }

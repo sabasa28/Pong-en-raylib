@@ -1,2 +1,2 @@
-void endingScreenUpdate();
-void endingScreenDraw();
+void updateEndingScreen();
+void drawEndingScreen();

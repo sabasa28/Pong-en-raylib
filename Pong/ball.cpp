@@ -1,28 +1,24 @@
-#include "raylib.h"
 #include "ball.h"
-Vector2 ballPosition;
-Vector2 ballSpeed;
-int ball_radius;
-Color BallColor;
+
+#include "raylib.h"
+
+Ball ball;
 Image worsted;
-Texture2D texturaBola;
-bool colliding = false;
-bool colliding2 = false;
-int lastPlayerHit = 1;
-bool invisible = false;
-float invisibility_timer=1;
+Texture2D ballTexture; //agregar a struct?
+bool colliding = false; //ESTO HAY QUE RESOLVERLO ENUM DE COLISION?? no funcionaria con la pared
+bool colliding2 = false; //ESTO HAY QUE RESOLVERLO/ POR AHI UN ENUM SOLO ENTRE LAS DOS PALETAS
 void initBall() {
-	ballPosition.x = GetScreenWidth() / 2;
-	ballPosition.y = GetScreenHeight() / 2;
-	ballSpeed.x = 3.0f;
-	ballSpeed.y = 3.0f;
-	ball_radius = 10;
-	BallColor = YELLOW;
+	ball.position.x = GetScreenWidth() / 2;
+	ball.position.y = GetScreenHeight() / 2;
+	ball.speed.x = 350.0f;
+	ball.speed.y = 350.0f;
+	ball.radius = 10;
+	ball.color = YELLOW;
 }
 
 void initBallTex() {
 	worsted = LoadImage("imagenes/estambre_rojo.png");
-	ImageResize(&worsted, ball_radius * 4, ball_radius * 4);
-	texturaBola = LoadTextureFromImage(worsted);
+	ImageResize(&worsted, ball.radius * 4, ball.radius * 4);
+	ballTexture = LoadTextureFromImage(worsted);
 	UnloadImage(worsted);
 }

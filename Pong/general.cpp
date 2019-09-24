@@ -1,7 +1,10 @@
 #include "general.h"
+
 #include <time.h>
 #include <stdlib.h>
+
 #include "raylib.h"
+
 #include "console.h"
 #include "paddles.h"
 #include "powerUPs.h"
@@ -10,6 +13,8 @@
 #include "background.h"
 #include "menu.h"
 #include "game.h"
+
+float speedMultiplier =1.0f;
 
 void initGeneral() {
 	initCronometers();
@@ -25,40 +30,36 @@ void initGeneral() {
 	initBackground();
 	initMusicSounds();
 	initFPS();
-	menuInit();
+	initMenu();
 	gamestate = Menu;
 }
 
-void resetValues() { //CAMBIAR LO DEL AUMENTO FPS A AUMENTO DE VELOCIDAD DE PELOTA Y PALETAS
-
-	ballPosition.x = GetScreenWidth() / 2;
-	ballPosition.y = GetScreenHeight() / 2;
+void resetValues() {
+	speedMultiplier = 1.0f;
+	ball.position.x = GetScreenWidth() / 2;
+	ball.position.y = GetScreenHeight() / 2;
 	colliding = false;
 	colliding2 = false;
-	pointsP1 = 0;
-	pointsP2 = 0;
+	player1.points = 0;
+	player2.points = 0;
 	total_points = 0;
-	P1.x = GetScreenWidth() / 8 - 20;
-	P1.y = GetScreenHeight() / 2;
-	P2.x = GetScreenWidth() - GetScreenWidth() / 8 + 20;
-	P2.y = GetScreenHeight() / 2;
-	FPS = 120;
-	StartigFPS = FPS;
+	player1.bar.x = GetScreenWidth() / 8 - 20;
+	player1.bar.y = GetScreenHeight() / 2;
+	player2.bar.x = GetScreenWidth() - GetScreenWidth() / 8 + 20;
+	player2.bar.y = GetScreenHeight() / 2;
 	pause = true;
-	framesCounter = 0;
 	powerUPexists = false;
 	powerUP2exists = false;
-	power_gravityP1 = 3;
-	power_gravityP2 = 3;
-	SetTargetFPS(FPS);
+	player1.gravityPills = 3;
+	player2.gravityPills = 3;
 	cronometer = (double)clock() / 1000;
-	cronometerflo = (double)clock() / 1000;
+	cronometerFlo = (double)clock() / 1000;
 	lastTimer = cronometer;
 	lastTimer2 = cronometer;
 }
 
 void close() {
-	UnloadTexture(texturaBola);
+	UnloadTexture(ballTexture);
 	UnloadTexture(texturaFondo);
 	UnloadTexture(texturaBarra);
 	UnloadMusicStream(gatitos);

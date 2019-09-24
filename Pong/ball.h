@@ -1,14 +1,19 @@
 #include "raylib.h"
-extern Vector2 ballPosition;
-extern Vector2 ballSpeed;
-extern int ball_radius;
-extern Color BallColor;
+
+struct Ball {
+	Vector2 position;
+	Vector2 speed;
+	int radius;
+	Color color;
+	int lastPlayerHit=1;
+	bool invisibility = false;
+	float invisibilityTimer = 0;
+};
+
+extern Ball ball;
 extern Image worsted;
-extern Texture2D texturaBola;
+extern Texture2D ballTexture;
 extern bool colliding;
 extern bool colliding2;
-extern int lastPlayerHit;
-extern bool invisible;
-extern float invisibility_timer;
 void initBall();
 void initBallTex();

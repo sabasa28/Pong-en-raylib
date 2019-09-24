@@ -1,2 +1,2 @@
-void gameplayUpdate();
-void gameplayDraw();
+void updateGameplay();
+void drawGameplay();

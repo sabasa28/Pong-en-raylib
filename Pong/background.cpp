@@ -1,5 +1,6 @@
-#include "raylib.h"
 #include "background.h"
+
+#include "raylib.h"
 
 Image cat_staring;
 Texture2D texturaFondo;
