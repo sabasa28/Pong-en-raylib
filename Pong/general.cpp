@@ -14,14 +14,14 @@
 #include "menu.h"
 #include "game.h"
 
-float speedMultiplier =1.0f;
+
 namespace catPong {
 	void initGeneral() {
 		initCronometers();
 		srand(time(NULL));
 		InitWindow(screenWidth, screenHeight, "PONG - Inaki Diez Galarza");//(Iñaki)
 		InitAudioDevice();
-		initPaddle();
+		initPaddles();
 		initPaddleTex();
 		initPowerUP();
 		initPowerUPTex();
@@ -35,18 +35,15 @@ namespace catPong {
 	}
 
 	void resetValues() {
+		initPaddles();
 		speedMultiplier = 1.0f;
-		ball.position.x = GetScreenWidth() / 2;
-		ball.position.y = GetScreenHeight() / 2;
+		ball.position.x = halfScreenWidth;
+		ball.position.y = halfScreenHeight;
 		colliding = false;
 		colliding2 = false;
 		player1.points = 0;
 		player2.points = 0;
 		total_points = 0;
-		player1.bar.x = GetScreenWidth() / 8 - 20;
-		player1.bar.y = GetScreenHeight() / 2;
-		player2.bar.x = GetScreenWidth() - GetScreenWidth() / 8 + 20;
-		player2.bar.y = GetScreenHeight() / 2;
 		pause = true;
 		powerUPexists = false;
 		powerUP2exists = false;

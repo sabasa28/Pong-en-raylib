@@ -1,6 +1,6 @@
 #ifndef GENERAL_H
 #define GENERAL_H
-extern float speedMultiplier;
+
 namespace catPong {
 	void resetValues();
 	void initGeneral();

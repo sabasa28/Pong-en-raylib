@@ -4,11 +4,11 @@
 
 struct Player
 {
-	float speed = 300.0f;
+	float speed;
 	int points = 0;
 	int wonMatches = 0;
 	int gravityPills = 3;
-	Color color;
+	Color color = GRAY;
 	Rectangle bar;
 	Texture textura;
 };
@@ -21,7 +21,7 @@ extern int winner;
 extern int total_points;
 extern int winning_points;
 namespace catPong {
-	extern void initPaddle();
+	extern void initPaddles();
 	extern void initPaddleTex();
 }
 #endif // PADDLES_H

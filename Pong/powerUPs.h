@@ -11,6 +11,7 @@ extern Texture2D texturaPowerUP;
 extern Texture2D texturaPowerUP2;
 extern int lastTimer;
 extern int lastTimer2;
+extern int delayToRespawn;
 namespace catPong {
 	void initPowerUP();
 	void initPowerUPTex();

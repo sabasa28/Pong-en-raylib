@@ -14,6 +14,7 @@ Texture2D texturaPowerUP;
 Texture2D texturaPowerUP2;
 int lastTimer = 0;
 int lastTimer2 = 0;
+int delayToRespawn = 15;
 
 static float heightDivider = 15.0f;
 static float widthDivider = 26.666666667f;

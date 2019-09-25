@@ -6,7 +6,7 @@
 #include "game.h"
 #include "paddles.h"
 #include "musicSounds.h"
-#include "console.h" //SACAR ESTO
+#include "console.h" //SACAR ESTO CUANDO MUEVAS EL SET WINDOW SIZE
 
 Rectangle PlayButton;
 Rectangle ExitButton;
@@ -16,56 +16,67 @@ Rectangle BlueButton;
 Rectangle RedButton2;
 Rectangle GreenButton2;
 Rectangle BlueButton2;
-int coloredbuttons_height;
-int coloredbuttons_width;
-int P1_colored_buttons_y;
-int P2_colored_buttons_y;
-int red_buttons_x;
-int green_buttons_x;
-int blue_buttons_x;
+static float coloredbuttonsHeightDivider = 15.0f;
+static float coloredbuttonsWidthDivider = 8.0f;
+static float p1ColoredButtonsYDivider = 1.285714285714286f;
+static float p2ColoredButtonsYDivider = 1.125f;
+static float redButtonsXDivider = 3.2f;
+static float greenButtonsXDivider = 2.28;
+static float blueButtonsXDivider = 1.777777777778f;
+static float buttonsMovementOffset = 45.0f; 
+static float playButtonXDivider = 4.44444444444444f;
+static float playButtonYDivider = 3.75f;
+static float playButtonWidthDivider = 2.0f;
+static float playButtonHeightDivider = 4.5f;
+static float exitButtonXDivider = 3.478260869565217f;
+static float exitButtonYDivider = 1.875f;
+static float exitButtonWidthDivider = 2.666666666667f;
+static float exitButtonHeightDivider = 5.625f;
+static float playTextXDivider = 2.66666666667f;
+static float playTextYDivider = 3.4615384615f;
+static float playTextFontDivider = 5.625f;
+static float exitTextXDivider = 2.424242424f;
+static float exitTextYDivider = 1.73076923f;
+static float exitTextFontDivider = 9.0f;
+static float ColorSelecTextXDivider = 10.0f;
+static float ColorSelecTextFontDivider = 12.857142857f;
+
 namespace catPong {
 	void initMenu() {
 		SetWindowSize(screenWidth, screenHeight); //VA EN INIT GENERAL
-		coloredbuttons_height = 30;
-		coloredbuttons_width = 100;
-		P1_colored_buttons_y = 350;
-		P2_colored_buttons_y = 400;
-		red_buttons_x = 250;
-		green_buttons_x = 350;
-		blue_buttons_x = 450;
-
-		PlayButton.x = 180;
-		PlayButton.y = 120;
-		PlayButton.width = 400;
-		PlayButton.height = 100;
-		ExitButton.x = 230;
-		ExitButton.y = 240;
-		ExitButton.width = 300;
-		ExitButton.height = 80;
-		RedButton.width = coloredbuttons_width;
-		RedButton.height = coloredbuttons_height;
-		RedButton2.width = coloredbuttons_width;
-		RedButton2.height = coloredbuttons_height;
-		GreenButton.width = coloredbuttons_width;
-		GreenButton.height = coloredbuttons_height;
-		GreenButton2.width = coloredbuttons_width;
-		GreenButton2.height = coloredbuttons_height;
-		BlueButton.width = coloredbuttons_width;
-		BlueButton.height = coloredbuttons_height;
-		BlueButton2.width = coloredbuttons_width;
-		BlueButton2.height = coloredbuttons_height;
-		RedButton.x = red_buttons_x;
-		RedButton.y = P1_colored_buttons_y;
-		RedButton2.x = red_buttons_x;
-		RedButton2.y = P2_colored_buttons_y;
-		GreenButton.x = green_buttons_x;
-		GreenButton.y = P1_colored_buttons_y;
-		GreenButton2.x = green_buttons_x;
-		GreenButton2.y = P2_colored_buttons_y;
-		BlueButton.x = blue_buttons_x;
-		BlueButton.y = P1_colored_buttons_y;
-		BlueButton2.x = blue_buttons_x;
-		BlueButton2.y = P2_colored_buttons_y;
+		
+		PlayButton.x = screenWidth / playButtonXDivider;		
+		PlayButton.y = screenHeight / playButtonYDivider;		
+		PlayButton.width = screenWidth / playButtonWidthDivider;	
+		PlayButton.height = screenHeight / playButtonHeightDivider;	
+		ExitButton.x = screenWidth / exitButtonXDivider;		
+		ExitButton.y = screenHeight / exitButtonYDivider;		
+		ExitButton.width = screenWidth / exitButtonWidthDivider;	
+		ExitButton.height = screenHeight / exitButtonHeightDivider;	
+		RedButton.width = screenWidth / coloredbuttonsWidthDivider;
+		RedButton.height = screenHeight / coloredbuttonsHeightDivider;
+		RedButton2.width = screenWidth / coloredbuttonsWidthDivider;
+		RedButton2.height = screenHeight / coloredbuttonsHeightDivider;
+		GreenButton.width = screenWidth / coloredbuttonsWidthDivider;
+		GreenButton.height = screenHeight / coloredbuttonsHeightDivider;
+		GreenButton2.width = screenWidth / coloredbuttonsWidthDivider;
+		GreenButton2.height = screenHeight / coloredbuttonsHeightDivider;
+		BlueButton.width = screenWidth / coloredbuttonsWidthDivider;
+		BlueButton.height = screenHeight / coloredbuttonsHeightDivider;
+		BlueButton2.width = screenWidth / coloredbuttonsWidthDivider;
+		BlueButton2.height = screenHeight / coloredbuttonsHeightDivider;
+		RedButton.x = screenWidth / redButtonsXDivider;
+		RedButton.y = screenHeight / p1ColoredButtonsYDivider;
+		RedButton2.x = screenWidth / redButtonsXDivider;
+		RedButton2.y = screenHeight / p2ColoredButtonsYDivider;
+		GreenButton.x = screenWidth / greenButtonsXDivider;
+		GreenButton.y = screenHeight / p1ColoredButtonsYDivider;
+		GreenButton2.x = screenWidth / greenButtonsXDivider;
+		GreenButton2.y = screenHeight / p2ColoredButtonsYDivider;
+		BlueButton.x = screenWidth / blueButtonsXDivider;
+		BlueButton.y = screenHeight / p1ColoredButtonsYDivider;
+		BlueButton2.x = screenWidth / blueButtonsXDivider;
+		BlueButton2.y = screenHeight / p2ColoredButtonsYDivider;
 	}
 	void updateMenu() {
 		PlayMusicStream(gatitos);
@@ -74,44 +85,44 @@ namespace catPong {
 		player2.wonMatches = 0;
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), RedButton))
 		{
-			RedButton.y = P1_colored_buttons_y - 10;
-			BlueButton.y = P1_colored_buttons_y;
-			GreenButton.y = P1_colored_buttons_y;
+			RedButton.y = screenHeight / p1ColoredButtonsYDivider - screenHeight / buttonsMovementOffset;
+			BlueButton.y = screenHeight / p1ColoredButtonsYDivider;
+			GreenButton.y = screenHeight / p1ColoredButtonsYDivider;
 			player1.color = RED;
 		}
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), GreenButton))
 		{
-			RedButton.y = P1_colored_buttons_y;
-			BlueButton.y = P1_colored_buttons_y;
-			GreenButton.y = P1_colored_buttons_y - 10;
+			RedButton.y = screenHeight / p1ColoredButtonsYDivider;
+			BlueButton.y = screenHeight / p1ColoredButtonsYDivider;
+			GreenButton.y = screenHeight / p1ColoredButtonsYDivider - screenHeight / buttonsMovementOffset;
 			player1.color = GREEN;
 		}
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), BlueButton))
 		{
-			RedButton.y = P1_colored_buttons_y;
-			BlueButton.y = P1_colored_buttons_y - 10;
-			GreenButton.y = P1_colored_buttons_y;
+			RedButton.y = screenHeight / p1ColoredButtonsYDivider;
+			BlueButton.y = screenHeight / p1ColoredButtonsYDivider - screenHeight / buttonsMovementOffset;
+			GreenButton.y = screenHeight / p1ColoredButtonsYDivider;
 			player1.color = BLUE;
 		}
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), RedButton2))
 		{
-			RedButton2.y = P2_colored_buttons_y - 10;
-			BlueButton2.y = P2_colored_buttons_y;
-			GreenButton2.y = P2_colored_buttons_y;
+			RedButton2.y = screenHeight / p2ColoredButtonsYDivider - screenHeight / buttonsMovementOffset;
+			BlueButton2.y = screenHeight / p2ColoredButtonsYDivider;
+			GreenButton2.y = screenHeight / p2ColoredButtonsYDivider;
 			player2.color = RED;
 		}
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), GreenButton2))
 		{
-			RedButton2.y = P2_colored_buttons_y;
-			BlueButton2.y = P2_colored_buttons_y;
-			GreenButton2.y = P2_colored_buttons_y - 10;
+			RedButton2.y = screenHeight / p2ColoredButtonsYDivider;
+			BlueButton2.y = screenHeight / p2ColoredButtonsYDivider;
+			GreenButton2.y = screenHeight / p2ColoredButtonsYDivider - screenHeight / buttonsMovementOffset;
 			player2.color = GREEN;
 		}
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), BlueButton2))
 		{
-			RedButton2.y = P2_colored_buttons_y;
-			BlueButton2.y = P2_colored_buttons_y - 10;
-			GreenButton2.y = P2_colored_buttons_y;
+			RedButton2.y = screenHeight / p2ColoredButtonsYDivider;
+			BlueButton2.y = screenHeight / p2ColoredButtonsYDivider - screenHeight / buttonsMovementOffset;
+			GreenButton2.y = screenHeight / p2ColoredButtonsYDivider;
 			player2.color = BLUE;
 		}
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), ExitButton)) gamestate = Close;
@@ -132,10 +143,10 @@ namespace catPong {
 		DrawRectangle(GreenButton2.x, GreenButton2.y, GreenButton2.width, GreenButton2.height, GREEN);
 		DrawRectangle(BlueButton.x, BlueButton.y, BlueButton.width, BlueButton.height, BLUE);
 		DrawRectangle(BlueButton2.x, BlueButton2.y, BlueButton2.width, BlueButton2.height, BLUE);
-		DrawText("P1 color:", 80, P1_colored_buttons_y, 35, BLACK);
-		DrawText("P2 color:", 75, P2_colored_buttons_y, 35, BLACK);
-		DrawText("Play", 300, 130, 80, BLACK);
-		DrawText("Exit", 330, 260, 50, BLACK);
+		DrawText("P1 color:", screenWidth/ColorSelecTextXDivider, screenHeight / p1ColoredButtonsYDivider, screenHeight / ColorSelecTextFontDivider, BLACK);
+		DrawText("P2 color:", screenWidth/ColorSelecTextXDivider, screenHeight / p2ColoredButtonsYDivider, screenHeight / ColorSelecTextFontDivider, BLACK);
+		DrawText("Play", screenWidth / playTextXDivider, screenHeight / playTextYDivider, screenHeight / playTextFontDivider, BLACK);
+		DrawText("Exit", screenWidth / exitTextXDivider, screenHeight / exitTextYDivider, screenHeight / exitTextFontDivider, BLACK);
 		EndDrawing();
 	}
 }

@@ -15,8 +15,13 @@ struct Ball {
 extern Ball ball;
 extern Image worsted;
 extern Texture2D ballTexture;
+extern float speedMultiplier;
+extern float boost;
 extern bool colliding;
 extern bool colliding2;
+extern float leftResetPos;
+extern float rightResetPos;
+
 namespace catPong {
 	void initBall();
 	void initBallTex();
