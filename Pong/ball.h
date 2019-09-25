@@ -15,5 +15,7 @@ extern Image worsted;
 extern Texture2D ballTexture;
 extern bool colliding;
 extern bool colliding2;
-void initBall();
-void initBallTex();
+namespace sabasa {
+	void initBall();
+	void initBallTex();
+}

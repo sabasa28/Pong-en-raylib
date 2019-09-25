@@ -2,4 +2,6 @@
 extern Music gatitos;
 extern Music metalNyan;
 extern Music nihaoNyan;
-void initMusicSounds();
+namespace sabasa {
+	void initMusicSounds();
+}

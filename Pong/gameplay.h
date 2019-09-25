@@ -1,2 +1,4 @@
-void updateGameplay();
-void drawGameplay();
+namespace sabasa {
+	void updateGameplay();
+	void drawGameplay();
+}

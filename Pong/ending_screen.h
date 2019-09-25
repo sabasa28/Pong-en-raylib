@@ -1,2 +1,4 @@
-void updateEndingScreen();
-void drawEndingScreen();
+namespace sabasa {
+	void updateEndingScreen();
+	void drawEndingScreen();
+}

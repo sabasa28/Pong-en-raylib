@@ -11,13 +11,14 @@ float cronometerFlo;
 static float FPS = 120;
 bool pause = 0;
 int framesCounter = 0;
+namespace sabasa {
+	void initCronometers() {
+		cronometer = (double)clock() / 1000;
+		cronometerFlo = (double)clock() / 1000;
+	}
 
-void initCronometers() {
-	cronometer = (double)clock() / 1000;
-	cronometerFlo = (double)clock() / 1000;
-}
-
-void initFPS() {
-	FPS = 120;
-	SetTargetFPS(FPS);
+	void initFPS() {
+		FPS = 120;
+		SetTargetFPS(FPS);
+	}
 }

@@ -5,4 +5,6 @@ enum State {
 	Close
 };
 extern State gamestate;
-void executeGame();
+namespace sabasa {
+	void executeGame();
+}

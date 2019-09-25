@@ -1,4 +1,6 @@
 extern float speedMultiplier;
-void resetValues();
-void initGeneral();
-void close();
+namespace sabasa {
+	void resetValues();
+	void initGeneral();
+	void close();
+}

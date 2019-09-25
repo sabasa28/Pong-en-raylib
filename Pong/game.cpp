@@ -6,30 +6,31 @@
 #include "gameplay.h"
 
 State gamestate;
-
-void executeGame(){
-	initGeneral();
-	while (!WindowShouldClose() && gamestate != Close)
-	{
-		switch (gamestate)
+namespace sabasa {
+	void executeGame() {
+		initGeneral();
+		while (!WindowShouldClose() && gamestate != Close)
 		{
-		case Menu:
-			updateMenu();
-			drawMenu();
-			resetValues();
-			break;
+			switch (gamestate)
+			{
+			case Menu:
+				updateMenu();
+				drawMenu();
+				resetValues();
+				break;
 
-		case Gameplay:
-			updateGameplay();
-			drawGameplay();
-			break;
+			case Gameplay:
+				updateGameplay();
+				drawGameplay();
+				break;
 
-		case EndScreen:
-			updateEndingScreen();
-			drawEndingScreen();
-			resetValues();
-			break;
+			case EndScreen:
+				updateEndingScreen();
+				drawEndingScreen();
+				resetValues();
+				break;
+			}
 		}
+		close();
 	}
-	close();
 }

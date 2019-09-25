@@ -9,5 +9,7 @@ extern Texture2D texturaPowerUP;
 extern Texture2D texturaPowerUP2;
 extern int lastTimer;
 extern int lastTimer2;
-void initPowerUP();
-void initPowerUPTex();
+namespace sabasa {
+	void initPowerUP();
+	void initPowerUPTex();
+}

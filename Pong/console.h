@@ -5,5 +5,7 @@ extern int cronometer;
 extern float cronometerFlo;
 extern bool pause;
 extern int framesCounter;
-void initCronometers();
-void initFPS();
+namespace sabasa {
+	void initCronometers();
+	void initFPS();
+}

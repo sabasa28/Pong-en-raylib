@@ -8,15 +8,17 @@ struct Player
 	int gravityPills = 3;
 	Color color;
 	Rectangle bar;
+	Texture textura;
 };
 extern Player player1;
 extern Player player2;
 extern float paddle_height;
 extern float paddle_width;
-extern Texture2D texturaBarra; //agregar a struct?
 extern Image standing_cat;
 extern int winner;
-extern void initPaddle();
-extern void initPaddleTex();
 extern int total_points;
 extern int winning_points;
+namespace sabasa {
+	extern void initPaddle();
+	extern void initPaddleTex();
+}
