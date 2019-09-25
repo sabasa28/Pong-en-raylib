@@ -2,6 +2,8 @@
 
 #include "raylib.h"
 
+#include "console.h"
+
 Rectangle PowerUP1;
 Rectangle PowerUP2;
 bool powerUPexists = false;
@@ -12,16 +14,19 @@ Texture2D texturaPowerUP;
 Texture2D texturaPowerUP2;
 int lastTimer = 0;
 int lastTimer2 = 0;
-namespace sabasa {
+
+static float heightDivider = 15.0f;
+static float widthDivider = 26.666666667f;
+namespace catPong {
 	void initPowerUP() {
-		PowerUP1.height = 30;
-		PowerUP2.height = 30;
-		PowerUP1.width = 30;
-		PowerUP2.width = 30;
-		PowerUP1.x = 400;
-		PowerUP1.y = -10;
-		PowerUP2.x = 400;
-		PowerUP2.y = -10;
+		PowerUP1.height = screenHeight / heightDivider;
+		PowerUP2.height = screenHeight / heightDivider;
+		PowerUP1.width = screenWidth / widthDivider;
+		PowerUP2.width = screenWidth / widthDivider;
+		PowerUP1.x = halfScreenWidth;
+		PowerUP2.x = halfScreenWidth;
+		PowerUP1.y = halfScreenHeight;
+		PowerUP2.y = halfScreenHeight;
 	}
 
 	void initPowerUPTex() {

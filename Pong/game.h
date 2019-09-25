@@ -1,3 +1,5 @@
+#ifndef GAME_H
+#define GAME_H
 enum State {
 	Menu,
 	Gameplay,
@@ -5,6 +7,7 @@ enum State {
 	Close
 };
 extern State gamestate;
-namespace sabasa {
+namespace catPong {
 	void executeGame();
 }
+#endif // GAME_H

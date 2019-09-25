@@ -7,7 +7,7 @@ Image worsted;
 Texture2D ballTexture; //agregar a struct?
 bool colliding = false; //ESTO HAY QUE RESOLVERLO ENUM DE COLISION?? no funcionaria con la pared
 bool colliding2 = false; //ESTO HAY QUE RESOLVERLO/ POR AHI UN ENUM SOLO ENTRE LAS DOS PALETAS
-namespace sabasa {
+namespace catPong {
 	void initBall() {
 		ball.position.x = GetScreenWidth() / 2;
 		ball.position.y = GetScreenHeight() / 2;

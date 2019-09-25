@@ -15,7 +15,7 @@
 #include "game.h"
 
 float speedMultiplier =1.0f;
-namespace sabasa {
+namespace catPong {
 	void initGeneral() {
 		initCronometers();
 		srand(time(NULL));
@@ -63,6 +63,7 @@ namespace sabasa {
 		UnloadTexture(texturaFondo);
 		UnloadTexture(player1.textura);
 		UnloadTexture(player2.textura);
+		UnloadSound(kittenMeow);
 		UnloadMusicStream(gatitos);
 		UnloadMusicStream(metalNyan);
 		CloseAudioDevice();

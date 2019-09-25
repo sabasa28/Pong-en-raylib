@@ -6,6 +6,7 @@
 #include "game.h"
 #include "paddles.h"
 #include "musicSounds.h"
+#include "console.h" //SACAR ESTO
 
 Rectangle PlayButton;
 Rectangle ExitButton;
@@ -15,15 +16,24 @@ Rectangle BlueButton;
 Rectangle RedButton2;
 Rectangle GreenButton2;
 Rectangle BlueButton2;
-int coloredbuttons_height = 30;
-int coloredbuttons_width = 100;
-int P1_colored_buttons_y = 350;
-int P2_colored_buttons_y = 400;
-int red_buttons_x = 250;
-int green_buttons_x = 350;
-int blue_buttons_x = 450;
-namespace sabasa {
+int coloredbuttons_height;
+int coloredbuttons_width;
+int P1_colored_buttons_y;
+int P2_colored_buttons_y;
+int red_buttons_x;
+int green_buttons_x;
+int blue_buttons_x;
+namespace catPong {
 	void initMenu() {
+		SetWindowSize(screenWidth, screenHeight); //VA EN INIT GENERAL
+		coloredbuttons_height = 30;
+		coloredbuttons_width = 100;
+		P1_colored_buttons_y = 350;
+		P2_colored_buttons_y = 400;
+		red_buttons_x = 250;
+		green_buttons_x = 350;
+		blue_buttons_x = 450;
+
 		PlayButton.x = 180;
 		PlayButton.y = 120;
 		PlayButton.width = 400;

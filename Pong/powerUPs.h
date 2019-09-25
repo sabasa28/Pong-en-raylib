@@ -1,3 +1,5 @@
+#ifndef POWERUPS_H
+#define POWERUPS_H
 #include "raylib.h"
 extern Rectangle PowerUP1;
 extern Rectangle PowerUP2;
@@ -9,7 +11,8 @@ extern Texture2D texturaPowerUP;
 extern Texture2D texturaPowerUP2;
 extern int lastTimer;
 extern int lastTimer2;
-namespace sabasa {
+namespace catPong {
 	void initPowerUP();
 	void initPowerUPTex();
 }
+#endif // POWERUPS_H

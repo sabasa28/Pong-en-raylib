@@ -1,3 +1,5 @@
+#ifndef PADDLES_H
+#define PADDLES_H
 #include "raylib.h"
 
 struct Player
@@ -18,7 +20,8 @@ extern Image standing_cat;
 extern int winner;
 extern int total_points;
 extern int winning_points;
-namespace sabasa {
+namespace catPong {
 	extern void initPaddle();
 	extern void initPaddleTex();
 }
+#endif // PADDLES_H

@@ -4,7 +4,7 @@
 
 Image cat_staring;
 Texture2D texturaFondo;
-namespace sabasa {
+namespace catPong {
 	void initBackground() {
 		cat_staring = LoadImage("imagenes/fat cat staring.jpg");
 		ImageResize(&cat_staring, GetScreenWidth(), GetScreenHeight());

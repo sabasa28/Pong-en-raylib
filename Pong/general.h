@@ -1,6 +1,9 @@
+#ifndef GENERAL_H
+#define GENERAL_H
 extern float speedMultiplier;
-namespace sabasa {
+namespace catPong {
 	void resetValues();
 	void initGeneral();
 	void close();
 }
+#endif // GENERAL_H

@@ -6,7 +6,7 @@
 #include "gameplay.h"
 
 State gamestate;
-namespace sabasa {
+namespace catPong {
 	void executeGame() {
 		initGeneral();
 		while (!WindowShouldClose() && gamestate != Close)

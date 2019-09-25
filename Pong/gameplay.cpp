@@ -13,7 +13,7 @@
 #include "game.h"
 #include "background.h"
 #include "general.h"
-namespace sabasa {
+namespace catPong {
 	void updateGameplay() {
 		PlayMusicStream(nihaoNyan);
 		UpdateMusicStream(nihaoNyan);
@@ -103,14 +103,14 @@ namespace sabasa {
 				colliding = true;
 				if (ball.position.y < player1.bar.y + player1.bar.height / 2)
 				{
-					if (ball.speed.y > 0)
+					if (ball.speed.y > 0) //AGREGAR CONDICION AL IF ANTERIOR
 					{
 						ball.speed.y *= -1.0f;
 					}
 				}
 				if (ball.position.y > player1.bar.y + player1.bar.height / 2)
 				{
-					if (ball.speed.y < 0)
+					if (ball.speed.y < 0) //AGREGAR CONDICION AL IF ANTERIOR
 					{
 						ball.speed.y *= -1.0f;
 					}
@@ -118,6 +118,7 @@ namespace sabasa {
 				ball.speed.x *= -1.0f;
 				ball.color = player1.color;
 				ball.lastPlayerHit = 1;
+				PlaySound(kittenMeow);
 			}
 			if (!CheckCollisionCircleRec(ball.position, ball.radius, player2.bar))
 			{
@@ -142,6 +143,7 @@ namespace sabasa {
 				ball.speed.x *= -1.0f;
 				ball.color = player2.color;
 				ball.lastPlayerHit = 2;
+				PlaySound(catMeow);
 			}
 
 			if (cronometer >= lastTimer + 15)

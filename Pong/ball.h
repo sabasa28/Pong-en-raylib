@@ -1,3 +1,5 @@
+#ifndef BALL_H
+#define BALL_H
 #include "raylib.h"
 
 struct Ball {
@@ -15,7 +17,8 @@ extern Image worsted;
 extern Texture2D ballTexture;
 extern bool colliding;
 extern bool colliding2;
-namespace sabasa {
+namespace catPong {
 	void initBall();
 	void initBallTex();
 }
+#endif // BALL_H

@@ -6,7 +6,7 @@
 #include "paddles.h"
 #include "console.h"
 #include "game.h"
-namespace sabasa {
+namespace catPong {
 	void updateEndingScreen() {
 		PlayMusicStream(metalNyan);
 		UpdateMusicStream(metalNyan);
