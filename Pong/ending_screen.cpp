@@ -6,6 +6,7 @@
 #include "paddles.h"
 #include "console.h"
 #include "game.h"
+#include "general.h"
 
 static float winnerTextFontDivider = 9.0f;
 static float winnerTextYDivider = 4.090909f;
@@ -41,6 +42,7 @@ namespace catPong {
 			StopMusicStream(metalNyan);
 			gamestate = Gameplay;
 		}
+		resetValues();
 	}
 
 	void drawEndingScreen() {

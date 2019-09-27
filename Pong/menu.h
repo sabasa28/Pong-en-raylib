@@ -9,13 +9,7 @@ extern Rectangle BlueButton;
 extern Rectangle RedButton2;
 extern Rectangle GreenButton2;
 extern Rectangle BlueButton2;
-//extern int coloredbuttonsHeightDivider;
-//extern int coloredbuttonsWidthDivider;
-//extern int p1ColoredButtonsYDivider;
-//extern int p2ColoredButtonsYDivider;
-//extern int redButtonsXDivider;
-//extern int greenButtonsXDivider;
-//extern int blueButtonsXDivider;
+
 namespace catPong {
 	void initMenu();
 	void updateMenu();

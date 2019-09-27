@@ -20,6 +20,7 @@ extern Image standing_cat;
 extern int winner;
 extern int total_points;
 extern int winning_points;
+extern float paddleTexOffsetXDivider;
 namespace catPong {
 	extern void initPaddles();
 	extern void initPaddleTex();

@@ -15,6 +15,8 @@ struct Ball {
 extern Ball ball;
 extern Image worsted;
 extern Texture2D ballTexture;
+extern float ballTexOffsetXDivider;
+extern float ballTexOffsetYDivider;
 extern float speedMultiplier;
 extern float boost;
 extern bool colliding;

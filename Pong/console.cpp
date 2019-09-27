@@ -4,15 +4,12 @@
 
 #include "raylib.h"
 
-const int screenWidth = 800;
-const int screenHeight = 450;
-const int halfScreenWidth = 400;
-const int halfScreenHeight = 225;
+int screenWidth = 800;
+int screenHeight = 450;
 int cronometer;
 float cronometerFlo;
 static float FPS = 120;
 bool pause = 0;
-int framesCounter = 0;
 namespace catPong {
 	void initCronometers() {
 		cronometer = (double)clock() / 1000;

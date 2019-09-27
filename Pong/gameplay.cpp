@@ -14,6 +14,16 @@
 #include "background.h"
 #include "general.h"
 
+
+
+static float PointsTextYDivider = 45.0f;
+static float PointsTextFontSizeDivider = 22.5f;
+static float p1PointsTextXDivider = 80.0f;
+static float p2PointsTextXDivider = 1.09589f;
+static float pauseTextXDivider = 3.47826f;
+static float pauseTextYDivider = 2.25f;
+static float pauseTextFontSizeDivider = 15.0f;
+
 namespace catPong {
 	void updateGameplay() {
 		PlayMusicStream(nihaoNyan);
@@ -68,7 +78,7 @@ namespace catPong {
 			{
 				ball.speed.x *= -1.0f;
 				ball.position.x = rightResetPos;
-				ball.position.y = halfScreenHeight;
+				ball.position.y = screenHeight / 2;
 				player1.points += 1;
 				total_points += 1;
 				speedMultiplier += boost;
@@ -81,7 +91,7 @@ namespace catPong {
 			{
 				ball.speed.x *= -1.0f;
 				ball.position.x = leftResetPos;
-				ball.position.y = halfScreenHeight;
+				ball.position.y = screenHeight / 2;
 				player2.points += 1;
 				total_points += 1;
 				speedMultiplier += boost;
@@ -102,19 +112,13 @@ namespace catPong {
 			}
 			if (CheckCollisionCircleRec(ball.position, ball.radius, player1.bar) && colliding == false) {
 				colliding = true;
-				if (ball.position.y < player1.bar.y + player1.bar.height / 2)
+				if (ball.position.y < player1.bar.y + player1.bar.height / 2&&ball.speed.y > 0)
 				{
-					if (ball.speed.y > 0) //AGREGAR CONDICION AL IF ANTERIOR
-					{
-						ball.speed.y *= -1.0f;
-					}
+					ball.speed.y *= -1.0f;
 				}
-				if (ball.position.y > player1.bar.y + player1.bar.height / 2)
+				if (ball.position.y > player1.bar.y + player1.bar.height / 2&& ball.speed.y < 0)
 				{
-					if (ball.speed.y < 0) //AGREGAR CONDICION AL IF ANTERIOR
-					{
-						ball.speed.y *= -1.0f;
-					}
+					ball.speed.y *= -1.0f;
 				}
 				ball.speed.x *= -1.0f;
 				ball.color = player1.color;
@@ -127,19 +131,13 @@ namespace catPong {
 			}
 			if (CheckCollisionCircleRec(ball.position, ball.radius, player2.bar) && colliding2 == false) {
 				colliding2 = true;
-				if (ball.position.y < player2.bar.y + player2.bar.height / 2)
+				if (ball.position.y < player2.bar.y + player2.bar.height / 2&& ball.speed.y > 0)
 				{
-					if (ball.speed.y > 0)
-					{
-						ball.speed.y *= -1.0f;
-					}
+					ball.speed.y *= -1.0f;
 				}
-				if (ball.position.y > player2.bar.y + player2.bar.height / 2)
+				if (ball.position.y > player2.bar.y + player2.bar.height / 2&& ball.speed.y < 0)
 				{
-					if (ball.speed.y < 0)
-					{
-						ball.speed.y *= -1.0f;
-					}
+					ball.speed.y *= -1.0f;
 				}
 				ball.speed.x *= -1.0f;
 				ball.color = player2.color;
@@ -149,20 +147,19 @@ namespace catPong {
 
 			if (cronometer >= lastTimer + delayToRespawn)
 			{
-				PowerUP1.y = rand() % (screenHeight - 40) + 20; //QUITAR MAGIC NUMBERS
+				PowerUP1.y = rand() % static_cast<int>(screenHeight - screenHeight / pwrUPMinRespawnPosDivider) + static_cast<int>(screenHeight / pwrUPMaxRespawnPosDivider);
 				powerUPexists = true;
 				lastTimer = cronometer;
 			}
 			if (cronometer >= lastTimer2 + delayToRespawn)
 			{
-				PowerUP2.y = rand() % (screenHeight - 40) + 20; //QUITAR MAGIC NUMBERS
+				PowerUP2.y = rand() % static_cast<int>(screenHeight - screenHeight / pwrUPMinRespawnPosDivider) + static_cast<int>(screenHeight / pwrUPMaxRespawnPosDivider);
 				powerUP2exists = true;
 				lastTimer2 = cronometer;
 			}
 			if (ball.position.y >= (screenHeight - ball.radius) && ball.speed.y > 0) ball.speed.y *= -1.0f;
 			if (ball.position.y <= ball.radius && ball.speed.y < 0) ball.speed.y *= -1.0f;
 		}
-		else framesCounter++;
 	}
 	void drawGameplay() {
 		BeginDrawing();
@@ -171,21 +168,21 @@ namespace catPong {
 		switch (player1.gravityPills)
 		{
 		default:
-		case 5:DrawCircle(130, 20, 5, BLACK);    //QUITAR MAGIC NUMBERS
-		case 4:DrawCircle(115, 20, 5, BLACK);	 //QUITAR MAGIC NUMBERS
-		case 3:DrawCircle(100, 20, 5, BLACK);	 //QUITAR MAGIC NUMBERS
-		case 2:DrawCircle(85, 20, 5, BLACK);	 //QUITAR MAGIC NUMBERS
-		case 1:DrawCircle(70, 20, 5, BLACK);	 //QUITAR MAGIC NUMBERS
-		case 0:break;							 //QUITAR MAGIC NUMBERS
-		}										 //QUITAR MAGIC NUMBERS
-		switch (player2.gravityPills)			 //QUITAR MAGIC NUMBERS
-		{										 //QUITAR MAGIC NUMBERS
-		default:								 //QUITAR MAGIC NUMBERS
-		case 5:DrawCircle(655, 20, 5, BLACK);	 //QUITAR MAGIC NUMBERS
-		case 4:DrawCircle(670, 20, 5, BLACK);	 //QUITAR MAGIC NUMBERS
-		case 3:DrawCircle(685, 20, 5, BLACK);	 //QUITAR MAGIC NUMBERS
-		case 2:DrawCircle(700, 20, 5, BLACK);	 //QUITAR MAGIC NUMBERS
-		case 1:DrawCircle(715, 20, 5, BLACK);	 //QUITAR MAGIC NUMBERS
+		case 5:DrawCircle(pwrUPcharge5.x, pwrUPcharge5.y, pwrUPcharge5.radius, BLACK);
+		case 4:DrawCircle(pwrUPcharge4.x, pwrUPcharge4.y, pwrUPcharge4.radius, BLACK);
+		case 3:DrawCircle(pwrUPcharge3.x, pwrUPcharge3.y, pwrUPcharge3.radius, BLACK);
+		case 2:DrawCircle(pwrUPcharge2.x, pwrUPcharge2.y, pwrUPcharge2.radius, BLACK);
+		case 1:DrawCircle(pwrUPcharge1.x, pwrUPcharge1.y, pwrUPcharge1.radius, BLACK);
+		case 0:break;							 
+		}										 
+		switch (player2.gravityPills)			 
+		{										 
+		default:								 
+		case 5:DrawCircle(pwrUPcharge10.x, pwrUPcharge10.y, pwrUPcharge10.radius, BLACK);
+		case 4:DrawCircle(pwrUPcharge9.x, pwrUPcharge9.y, pwrUPcharge9.radius, BLACK);	 
+		case 3:DrawCircle(pwrUPcharge8.x, pwrUPcharge8.y, pwrUPcharge8.radius, BLACK);	 
+		case 2:DrawCircle(pwrUPcharge7.x, pwrUPcharge7.y, pwrUPcharge7.radius, BLACK);	 
+		case 1:DrawCircle(pwrUPcharge6.x, pwrUPcharge6.y, pwrUPcharge6.radius, BLACK);	 
 		case 0:break;
 		}
 
@@ -200,17 +197,17 @@ namespace catPong {
 		}
 		if (ball.invisibility == false)
 		{
-			DrawTexture(ballTexture, ball.position.x - 27, ball.position.y - 17, ball.color); //QUITAR MAGIC NUMBERS
+			DrawTexture(ballTexture, ball.position.x - screenWidth/ballTexOffsetXDivider, ball.position.y - screenHeight/ballTexOffsetYDivider, ball.color);
 		}
 		if (ball.invisibility == true && cronometerFlo >= ball.invisibilityTimer + 0.75)
 		{
 			ball.invisibility = false;
 		}
-		DrawTexture(player1.textura, player1.bar.x - 18, player1.bar.y, player1.color);			 //QUITAR MAGIC NUMBERS
-		DrawTexture(player2.textura, player2.bar.x - 18, player2.bar.y, player2.color);			 //QUITAR MAGIC NUMBERS
-		DrawText(TextFormat("P1: %i", player1.points), 10, 10, 20, player1.color);				 //QUITAR MAGIC NUMBERS
-		DrawText(TextFormat("P2: %i", player2.points), screenWidth - 70, 10, 20, player2.color); //QUITAR MAGIC NUMBERS
-		if (pause && ((framesCounter / 30) % 4)) DrawText("PRESS SPACE TO PLAY", 230, 200, 30, BLACK); //modificar, que no sea con los frames sino segs, y sacar "framerate++"
+		DrawTexture(player1.textura, player1.bar.x - screenWidth / paddleTexOffsetXDivider, player1.bar.y, player1.color);
+		DrawTexture(player2.textura, player2.bar.x - screenWidth / paddleTexOffsetXDivider, player2.bar.y, player2.color);
+		DrawText(TextFormat("P1: %i", player1.points), screenWidth / p1PointsTextXDivider, screenHeight / PointsTextYDivider, screenHeight / PointsTextFontSizeDivider, player1.color);
+		DrawText(TextFormat("P2: %i", player2.points), screenWidth / p2PointsTextXDivider, screenHeight / PointsTextYDivider, screenHeight / PointsTextFontSizeDivider, player2.color);
+		if (pause && (cronometer % 2 == 0)) DrawText("PRESS SPACE TO PLAY", screenWidth / pauseTextXDivider, screenHeight / pauseTextYDivider, screenHeight / pauseTextFontSizeDivider, DARKPURPLE);
 		EndDrawing();
 	}
 }

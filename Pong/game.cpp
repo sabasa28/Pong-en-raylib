@@ -16,7 +16,6 @@ namespace catPong {
 			case Menu:
 				updateMenu();
 				drawMenu();
-				resetValues();
 				break;
 
 			case Gameplay:
@@ -27,7 +26,6 @@ namespace catPong {
 			case EndScreen:
 				updateEndingScreen();
 				drawEndingScreen();
-				resetValues();
 				break;
 			}
 		}

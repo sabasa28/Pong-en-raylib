@@ -6,7 +6,10 @@
 #include "game.h"
 #include "paddles.h"
 #include "musicSounds.h"
-#include "console.h" //SACAR ESTO CUANDO MUEVAS EL SET WINDOW SIZE
+#include "console.h"
+#include "general.h"
+#include "ball.h"		//SACAR CUANDO HAYAS HECHO UNA FUNCION PARA CARGAR TODOS LOS VALORES
+#include "powerUPs.h"	//SACAR CUANDO HAYAS HECHO UNA FUNCION PARA CARGAR TODOS LOS VALORES
 
 Rectangle PlayButton;
 Rectangle ExitButton;
@@ -23,7 +26,7 @@ static float p2ColoredButtonsYDivider = 1.125f;
 static float redButtonsXDivider = 3.2f;
 static float greenButtonsXDivider = 2.28;
 static float blueButtonsXDivider = 1.777777777778f;
-static float buttonsMovementOffset = 45.0f; 
+static float selectedButtonDifference = 45.0f; 
 static float playButtonXDivider = 4.44444444444444f;
 static float playButtonYDivider = 3.75f;
 static float playButtonWidthDivider = 2.0f;
@@ -85,7 +88,7 @@ namespace catPong {
 		player2.wonMatches = 0;
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), RedButton))
 		{
-			RedButton.y = screenHeight / p1ColoredButtonsYDivider - screenHeight / buttonsMovementOffset;
+			RedButton.y = screenHeight / p1ColoredButtonsYDivider - screenHeight / selectedButtonDifference;
 			BlueButton.y = screenHeight / p1ColoredButtonsYDivider;
 			GreenButton.y = screenHeight / p1ColoredButtonsYDivider;
 			player1.color = RED;
@@ -94,19 +97,19 @@ namespace catPong {
 		{
 			RedButton.y = screenHeight / p1ColoredButtonsYDivider;
 			BlueButton.y = screenHeight / p1ColoredButtonsYDivider;
-			GreenButton.y = screenHeight / p1ColoredButtonsYDivider - screenHeight / buttonsMovementOffset;
+			GreenButton.y = screenHeight / p1ColoredButtonsYDivider - screenHeight / selectedButtonDifference;
 			player1.color = GREEN;
 		}
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), BlueButton))
 		{
 			RedButton.y = screenHeight / p1ColoredButtonsYDivider;
-			BlueButton.y = screenHeight / p1ColoredButtonsYDivider - screenHeight / buttonsMovementOffset;
+			BlueButton.y = screenHeight / p1ColoredButtonsYDivider - screenHeight / selectedButtonDifference;
 			GreenButton.y = screenHeight / p1ColoredButtonsYDivider;
 			player1.color = BLUE;
 		}
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), RedButton2))
 		{
-			RedButton2.y = screenHeight / p2ColoredButtonsYDivider - screenHeight / buttonsMovementOffset;
+			RedButton2.y = screenHeight / p2ColoredButtonsYDivider - screenHeight / selectedButtonDifference;
 			BlueButton2.y = screenHeight / p2ColoredButtonsYDivider;
 			GreenButton2.y = screenHeight / p2ColoredButtonsYDivider;
 			player2.color = RED;
@@ -115,21 +118,38 @@ namespace catPong {
 		{
 			RedButton2.y = screenHeight / p2ColoredButtonsYDivider;
 			BlueButton2.y = screenHeight / p2ColoredButtonsYDivider;
-			GreenButton2.y = screenHeight / p2ColoredButtonsYDivider - screenHeight / buttonsMovementOffset;
+			GreenButton2.y = screenHeight / p2ColoredButtonsYDivider - screenHeight / selectedButtonDifference;
 			player2.color = GREEN;
 		}
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), BlueButton2))
 		{
 			RedButton2.y = screenHeight / p2ColoredButtonsYDivider;
-			BlueButton2.y = screenHeight / p2ColoredButtonsYDivider - screenHeight / buttonsMovementOffset;
+			BlueButton2.y = screenHeight / p2ColoredButtonsYDivider - screenHeight / selectedButtonDifference;
 			GreenButton2.y = screenHeight / p2ColoredButtonsYDivider;
 			player2.color = BLUE;
+		}
+		if (IsKeyDown('L'))
+		{
+			screenHeight = 600;
+			screenWidth = 1000;
+			SetWindowSize(screenWidth, screenHeight);
+			initMenu();
+			initBackground();
+			initPaddles();
+			initPaddleTex();
+			initBall();
+			initBallTex();
+			initPowerUP();
+			initPowerUPTex();
+			
+
 		}
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), ExitButton)) gamestate = Close;
 		if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), PlayButton)) {
 			StopMusicStream(gatitos);
 			gamestate = Gameplay;
 		}
+		resetValues();
 	}
 	void drawMenu() {
 		BeginDrawing();

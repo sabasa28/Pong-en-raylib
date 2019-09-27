@@ -37,8 +37,8 @@ namespace catPong {
 	void resetValues() {
 		initPaddles();
 		speedMultiplier = 1.0f;
-		ball.position.x = halfScreenWidth;
-		ball.position.y = halfScreenHeight;
+		ball.position.x = screenWidth / 2;
+		ball.position.y = screenHeight / 2;
 		colliding = false;
 		colliding2 = false;
 		player1.points = 0;
