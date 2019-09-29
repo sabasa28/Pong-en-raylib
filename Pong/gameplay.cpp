@@ -15,7 +15,7 @@
 #include "general.h"
 
 
-
+Gamemode gamemode = vsPlayer;
 static float PointsTextYDivider = 45.0f;
 static float PointsTextFontSizeDivider = 22.5f;
 static float p1PointsTextXDivider = 80.0f;
@@ -46,6 +46,28 @@ namespace catPong {
 		if (IsKeyPressed(KEY_SPACE)) pause = !pause;
 		if (!pause)
 		{
+			if (IsKeyDown('W') && player1.bar.y > 0) player1.bar.y -= player1.speed * GetFrameTime() *speedMultiplier;
+			if (IsKeyDown('S') && player1.bar.y + player1.bar.height < screenHeight) player1.bar.y += player1.speed * GetFrameTime()*speedMultiplier;
+			if (IsKeyPressed(KEY_LEFT_CONTROL) && player1.gravityPills > 0)
+			{
+				ball.speed.y *= -1.0f;
+				player1.gravityPills -= 1;
+			}
+			if (gamemode==vsPlayer)
+			{
+				if (IsKeyDown(KEY_UP) && player2.bar.y > 0) player2.bar.y -= player2.speed * GetFrameTime()*speedMultiplier;
+				if (IsKeyDown(KEY_DOWN) && player2.bar.y + player2.bar.height < screenHeight) player2.bar.y += player2.speed * GetFrameTime()*speedMultiplier;
+				if (IsKeyPressed(KEY_RIGHT_CONTROL) && player2.gravityPills > 0)
+				{
+					ball.speed.y *= -1.0f;
+					player2.gravityPills -= 1;
+				}
+			}
+			else if (gamemode==vsBot)
+			{
+				if (ball.position.y>player2.bar.y+player2.bar.height/2&& player2.bar.y + player2.bar.height < screenHeight) player2.bar.y += player2.speed * GetFrameTime()*speedMultiplier;
+				if (ball.position.y < player2.bar.y + player2.bar.height / 2 && player2.bar.y > 0) player2.bar.y -= player2.speed * GetFrameTime()*speedMultiplier;
+			}
 			if (CheckCollisionCircleRec(ball.position, ball.radius, PowerUP1) && powerUPexists == true)
 			{
 				if (ball.lastPlayerHit == 1)
@@ -64,16 +86,6 @@ namespace catPong {
 				ball.invisibilityTimer = cronometerFlo;
 				powerUP2exists = false;
 			}
-			if (IsKeyPressed(KEY_LEFT_CONTROL) && player1.gravityPills > 0)
-			{
-				ball.speed.y *= -1.0f;
-				player1.gravityPills -= 1;
-			}
-			if (IsKeyPressed(KEY_RIGHT_CONTROL) && player2.gravityPills > 0)
-			{
-				ball.speed.y *= -1.0f;
-				player2.gravityPills -= 1;
-			}
 			if (ball.position.x + ball.radius >= screenWidth)
 			{
 				ball.speed.x *= -1.0f;
@@ -82,8 +94,6 @@ namespace catPong {
 				player1.points += 1;
 				total_points += 1;
 				speedMultiplier += boost;
-				colliding2 = true;
-				colliding = true;
 				ball.color = player2.color;
 				ball.lastPlayerHit = 2;
 			}
@@ -95,23 +105,12 @@ namespace catPong {
 				player2.points += 1;
 				total_points += 1;
 				speedMultiplier += boost;
-				colliding = true;
-				colliding2 = true;
 				ball.color = player1.color;
 				ball.lastPlayerHit = 1;
 			}
-			if (IsKeyDown('W') && player1.bar.y > 0) player1.bar.y -= player1.speed * GetFrameTime() *speedMultiplier;
-			if (IsKeyDown('S') && player1.bar.y + player1.bar.height < screenHeight) player1.bar.y += player1.speed * GetFrameTime()*speedMultiplier;
-			if (IsKeyDown(KEY_UP) && player2.bar.y > 0) player2.bar.y -= player2.speed * GetFrameTime()*speedMultiplier;
-			if (IsKeyDown(KEY_DOWN) && player2.bar.y + player2.bar.height < screenHeight) player2.bar.y += player2.speed * GetFrameTime()*speedMultiplier;
 			ball.position.x += ball.speed.x*GetFrameTime()*speedMultiplier;
 			ball.position.y += ball.speed.y*GetFrameTime()*speedMultiplier;
-			if (!CheckCollisionCircleRec(ball.position, ball.radius, player1.bar))
-			{
-				colliding = false;
-			}
-			if (CheckCollisionCircleRec(ball.position, ball.radius, player1.bar) && colliding == false) {
-				colliding = true;
+			if (CheckCollisionCircleRec(ball.position, ball.radius, player1.bar) && ball.speed.x<0) {
 				if (ball.position.y < player1.bar.y + player1.bar.height / 2&&ball.speed.y > 0)
 				{
 					ball.speed.y *= -1.0f;
@@ -125,12 +124,7 @@ namespace catPong {
 				ball.lastPlayerHit = 1;
 				PlaySound(kittenMeow);
 			}
-			if (!CheckCollisionCircleRec(ball.position, ball.radius, player2.bar))
-			{
-				colliding2 = false;
-			}
-			if (CheckCollisionCircleRec(ball.position, ball.radius, player2.bar) && colliding2 == false) {
-				colliding2 = true;
+			if (CheckCollisionCircleRec(ball.position, ball.radius, player2.bar)&& ball.speed.x > 0) {
 				if (ball.position.y < player2.bar.y + player2.bar.height / 2&& ball.speed.y > 0)
 				{
 					ball.speed.y *= -1.0f;

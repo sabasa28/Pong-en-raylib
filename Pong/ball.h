@@ -19,8 +19,6 @@ extern float ballTexOffsetXDivider;
 extern float ballTexOffsetYDivider;
 extern float speedMultiplier;
 extern float boost;
-extern bool colliding;
-extern bool colliding2;
 extern float leftResetPos;
 extern float rightResetPos;
 

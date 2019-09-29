@@ -142,7 +142,7 @@
     <ClCompile Include="gameplay.cpp" />
     <ClCompile Include="general.cpp" />
     <ClCompile Include="menu.cpp" />
-    <ClCompile Include="musicSounds.cpp" />
+    <ClCompile Include="musicsounds.cpp" />
     <ClCompile Include="paddles.cpp" />
     <ClCompile Include="powerUPs.cpp" />
   </ItemGroup>
@@ -155,7 +155,7 @@
     <ClInclude Include="gameplay.h" />
     <ClInclude Include="general.h" />
     <ClInclude Include="menu.h" />
-    <ClInclude Include="musicSounds.h" />
+    <ClInclude Include="musicsounds.h" />
     <ClInclude Include="paddles.h" />
     <ClInclude Include="powerUPs.h" />
   </ItemGroup>

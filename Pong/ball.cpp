@@ -6,8 +6,6 @@
 Ball ball;
 Image worsted;
 Texture2D ballTexture; //agregar a struct?
-bool colliding = false; //ESTO HAY QUE RESOLVERLO ENUM DE COLISION??
-bool colliding2 = false; //ESTO HAY QUE RESOLVERLO/ POR AHI UN ENUM SOLO ENTRE LAS DOS PALETAS
 float ballTexOffsetXDivider = 29.62963f;
 float ballTexOffsetYDivider = 26.47059f;
 static float BallXSpeedDivider = 2.28571f;

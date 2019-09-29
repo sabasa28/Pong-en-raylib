@@ -17,9 +17,9 @@
 
 namespace catPong {
 	void initGeneral() {
-		initCronometers();
+		initConsole();
 		srand(time(NULL));
-		InitWindow(screenWidth, screenHeight, "PONG - Inaki Diez Galarza");//(Iñaki)
+		InitWindow(screensize1.x, screensize1.y, "PONG - Inaki Diez Galarza");//(Iñaki)
 		InitAudioDevice();
 		initPaddles();
 		initPaddleTex();
@@ -29,7 +29,6 @@ namespace catPong {
 		initBallTex();
 		initBackground();
 		initMusicSounds();
-		initFPS();
 		initMenu();
 		gamestate = Menu;
 	}
@@ -39,8 +38,6 @@ namespace catPong {
 		speedMultiplier = 1.0f;
 		ball.position.x = screenWidth / 2;
 		ball.position.y = screenHeight / 2;
-		colliding = false;
-		colliding2 = false;
 		player1.points = 0;
 		player2.points = 0;
 		total_points = 0;
