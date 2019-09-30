@@ -47,7 +47,7 @@ namespace catPong {
 		player1.gravityPills = 3;
 		player2.gravityPills = 3;
 		cronometer = (double)clock() / 1000;
-		cronometerFlo = (double)clock() / 1000;
+		cronometerFlo = static_cast<float>(clock()) / 1000;
 		lastTimer = cronometer;
 		lastTimer2 = cronometer;
 	}

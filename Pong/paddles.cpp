@@ -13,6 +13,8 @@ int winner = 1;
 Image standing_cat;
 int total_points = 0;
 int winning_points = 10;
+bool botUsedPowerUP = false;
+int minTimeBetweenBotPwrUp = 8;
 static float xPosDividerP1 = 10.0f;
 static float xPosDividerP2 = 1.111111111f;
 static float playerSpeedDivider = 1.5f;

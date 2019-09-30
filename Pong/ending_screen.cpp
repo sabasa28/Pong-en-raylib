@@ -48,13 +48,13 @@ namespace catPong {
 	void drawEndingScreen() {
 		BeginDrawing();
 		ClearBackground(RAYWHITE);
-		DrawText(TextFormat("PLAYER %i", winner), screenWidth / winner1TextXDivider, screenHeight/ winnerTextYDivider, screenHeight / winnerTextFontDivider, BLACK);
-		DrawText("WINS.", screenWidth / winner2TextXDivider, screenHeight / winnerTextYDivider, screenHeight / winnerTextFontDivider, BLACK);
-		DrawText("Press 'R' to play again.", screenWidth / optionsTextXDivider, screenHeight / restartTextYDivider, screenHeight / optionsTextFontDivider, BLACK);
-		DrawText("Press 'M' to go to menu.", screenWidth / optionsTextXDivider, screenHeight / menuTextYDivider, screenHeight / optionsTextFontDivider, BLACK);
-		DrawText("Press 'ESC' to quit.", screenWidth / optionsTextXDivider, screenHeight / quitTextYDivider, screenHeight / optionsTextFontDivider, BLACK);
-		DrawText(TextFormat("Won matches P1: %i", player1.wonMatches), screenWidth / matchesTextXDivider, screenHeight / matchesP1TextYDivider, screenHeight / matchesTextFontDivider, player1.color);
-		DrawText(TextFormat("Won matches P2: %i", player2.wonMatches), screenWidth / matchesTextXDivider, screenHeight / matchesP2TextYDivider, screenHeight / matchesTextFontDivider, player2.color);
+		DrawText(TextFormat("PLAYER %i", winner), static_cast<int>(screenWidth / winner1TextXDivider), static_cast<int>(screenHeight/ winnerTextYDivider), static_cast<int>(screenHeight / winnerTextFontDivider), BLACK);
+		DrawText("WINS.", static_cast<int>(screenWidth / winner2TextXDivider), static_cast<int>(screenHeight / winnerTextYDivider), static_cast<int>(screenHeight / winnerTextFontDivider), BLACK);
+		DrawText("Press 'R' to play again.", static_cast<int>(screenWidth / optionsTextXDivider), static_cast<int>(screenHeight / restartTextYDivider), static_cast<int>(screenHeight / optionsTextFontDivider), BLACK);
+		DrawText("Press 'M' to go to menu.", static_cast<int>(screenWidth / optionsTextXDivider), static_cast<int>(screenHeight / menuTextYDivider), static_cast<int>(screenHeight / optionsTextFontDivider), BLACK);
+		DrawText("Press 'ESC' to quit.", static_cast<int>(screenWidth / optionsTextXDivider), static_cast<int>(screenHeight / quitTextYDivider), static_cast<int>(screenHeight / optionsTextFontDivider), BLACK);
+		DrawText(TextFormat("Won matches P1: %i", player1.wonMatches), static_cast<int>(screenWidth / matchesTextXDivider), static_cast<int>(screenHeight / matchesP1TextYDivider), static_cast<int>(screenHeight / matchesTextFontDivider), player1.color);
+		DrawText(TextFormat("Won matches P2: %i", player2.wonMatches), static_cast<int>(screenWidth / matchesTextXDivider), static_cast<int>(screenHeight / matchesP2TextYDivider), static_cast<int>(screenHeight / matchesTextFontDivider), player2.color);
 		EndDrawing();
 	}
 }

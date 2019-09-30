@@ -15,7 +15,7 @@ bool pause = 0;
 namespace catPong {
 	void initConsole() {
 		cronometer = (double)clock() / 1000;
-		cronometerFlo = (double)clock() / 1000;
+		cronometerFlo = static_cast<float>(clock()) / 1000;
 		FPS = 120;
 		SetTargetFPS(FPS);
 	}

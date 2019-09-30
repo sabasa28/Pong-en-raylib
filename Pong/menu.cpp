@@ -172,22 +172,6 @@ namespace catPong {
 			{
 				p2ColorSelected = Blue;
 			}
-			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), ScreenSize1Button))
-			{
-				screenSizeSelected = x800y450;
-				AdjustGameSize(screensize1.x, screensize1.y);
-			}
-			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), ScreenSize2Button))
-			{
-				screenSizeSelected = x1200y675;
-				AdjustGameSize(screensize2.x, screensize2.y);
-			}
-			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), ScreenSize3Button))
-			{
-				screenSizeSelected = fullscreen;
-				FullscreenGameSize();
-				timerToClickAgain = cronometer+1;
-			}
 			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), VsPlayerButton))
 			{
 				gamemode = vsPlayer;
@@ -195,6 +179,24 @@ namespace catPong {
 			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), VsBotButton))
 			{
 				gamemode = vsBot;
+			}
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), ScreenSize1Button))
+			{
+				screenSizeSelected = x800y450;
+				AdjustGameSize(screensize1.x, screensize1.y);
+				timerToClickAgain = cronometer + 1;			
+			}
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), ScreenSize2Button))
+			{
+				screenSizeSelected = x1200y675;
+				AdjustGameSize(screensize2.x, screensize2.y);
+				timerToClickAgain = cronometer + 1;
+			}
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), ScreenSize3Button))
+			{
+				screenSizeSelected = fullscreen;
+				FullscreenGameSize();
+				timerToClickAgain = cronometer+1;
 			}
 		}
 		switch (screenSizeSelected)
