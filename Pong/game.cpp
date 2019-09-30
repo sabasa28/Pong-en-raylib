@@ -9,10 +9,8 @@ State gamestate;
 namespace catPong {
 	void executeGame() {
 		initGeneral();
-		while (!WindowShouldClose() && gamestate != Close)
-		{
-			switch (gamestate)
-			{
+		while (!WindowShouldClose() && gamestate != Close){
+			switch (gamestate){
 			case Menu:
 				updateMenu();
 				drawMenu();

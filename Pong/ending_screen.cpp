@@ -26,12 +26,10 @@ namespace catPong {
 	void updateEndingScreen() {
 		PlayMusicStream(metalNyan);
 		UpdateMusicStream(metalNyan);
-		if (player1.points >= winning_points)
-		{
+		if (player1.points >= winning_points){
 			winner = 1;
 		}
-		else if (player2.points >= winning_points)
-		{
+		else if (player2.points >= winning_points){
 			winner = 2;
 		}
 		if (IsKeyPressed('M')) {

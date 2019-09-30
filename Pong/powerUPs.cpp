@@ -34,7 +34,6 @@ Rectangle PowerUP2;
 bool powerUPexists = false;
 bool powerUP2exists = false;
 Image mouse1;
-Image mouse2;
 Texture2D texturaPowerUP;
 Texture2D texturaPowerUP2;
 int lastTimer = 0;
@@ -42,6 +41,8 @@ int lastTimer2 = 0;
 int delayToRespawn = 15;
 static float heightDivider = 15.0f;
 static float widthDivider = 26.666666667f;
+float powerUPTexOffsetXDivider = 50.0f;
+float powerUPTexOffsetYDivider = 60.0f;
 namespace catPong {
 	void initPowerUP() {
 		PowerUP1.height = screenHeight / heightDivider;
@@ -85,13 +86,10 @@ namespace catPong {
 	}
 
 	void initPowerUPTex() {
-		mouse1 = LoadImage("imagenes/white_mouse.png");
-		mouse2 = LoadImage("imagenes/gray_mouse.png");
-		ImageResize(&mouse1, PowerUP1.width, PowerUP1.height);
-		ImageResize(&mouse2, PowerUP2.width, PowerUP2.height);
+		mouse1 = LoadImage("imagenes/PowerUP.png");
+		ImageResize(&mouse1, PowerUP1.width*2.4f, PowerUP1.height*2);
 		texturaPowerUP = LoadTextureFromImage(mouse1);
-		texturaPowerUP2 = LoadTextureFromImage(mouse2);
-		UnloadImage(mouse2);
+		texturaPowerUP2 = LoadTextureFromImage(mouse1);
 		UnloadImage(mouse1);
 	}
 }

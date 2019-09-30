@@ -2,7 +2,7 @@
 #define BACKGROUND_H
 
 #include "raylib.h"
-extern Image cat_staring;
+extern Image backgroundCats;
 extern Texture2D texturaFondo;
 namespace catPong {
 	void initBackground();

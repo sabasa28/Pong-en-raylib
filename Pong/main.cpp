@@ -10,7 +10,6 @@
 
 //HACER QUE LA ENDING SCREEN SEA CON EL MOUSE, CONSISTENCIA!
 
-void main()
-{
+void main(){
 	catPong::executeGame();
 }

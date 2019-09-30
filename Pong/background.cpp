@@ -3,13 +3,13 @@
 #include "raylib.h"
 
 #include "console.h"
-Image cat_staring;
+Image backgroundCats;
 Texture2D texturaFondo;
-namespace catPong {
-	void initBackground() {
-		cat_staring = LoadImage("imagenes/fat cat staring.jpg");
-		ImageResize(&cat_staring, screenWidth, screenHeight);
-		texturaFondo = LoadTextureFromImage(cat_staring);
-		UnloadImage(cat_staring);
+namespace catPong{
+	void initBackground(){
+		backgroundCats = LoadImage("imagenes/fondo_gatos_original.png");
+		ImageResize(&backgroundCats, screenWidth, screenHeight);
+		texturaFondo = LoadTextureFromImage(backgroundCats);
+		UnloadImage(backgroundCats);
 	}
 }

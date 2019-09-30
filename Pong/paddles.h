@@ -2,8 +2,7 @@
 #define PADDLES_H
 #include "raylib.h"
 
-struct Player
-{
+struct Player{
 	float speed;
 	int points = 0;
 	int wonMatches = 0;
@@ -16,14 +15,15 @@ extern Player player1;
 extern Player player2;
 extern float paddle_height;
 extern float paddle_width;
-extern Image standing_cat;
+extern Image weirdCat;
 extern int winner;
 extern int total_points;
 extern int winning_points;
 extern bool botUsedPowerUP;
 extern int minTimeBetweenBotPwrUp;
 extern float paddleTexOffsetXDivider;
-namespace catPong {
+extern float paddleTexOffsetYDivider;
+namespace catPong{
 	extern void initPaddles();
 	extern void initPaddleTex();
 }

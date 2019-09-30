@@ -148,59 +148,31 @@ namespace catPong {
 				StopMusicStream(gatitos);
 				gamestate = Gameplay;
 			}
-			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), RedButton))
-			{
-				p1ColorSelected = Red;
-			}
-			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), GreenButton))
-			{
-				p1ColorSelected = Green;
-			}
-			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), BlueButton))
-			{
-				p1ColorSelected = Blue;
-			}
-			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), RedButton2))
-			{
-				p2ColorSelected = Red;
-			}
-			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), GreenButton2))
-			{
-				p2ColorSelected = Green;
-			}
-			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), BlueButton2))
-			{
-				p2ColorSelected = Blue;
-			}
-			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), VsPlayerButton))
-			{
-				gamemode = vsPlayer;
-			}
-			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), VsBotButton))
-			{
-				gamemode = vsBot;
-			}
-			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), ScreenSize1Button))
-			{
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), RedButton))p1ColorSelected = Red;
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), GreenButton))p1ColorSelected = Green;
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), BlueButton))p1ColorSelected = Blue;
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), RedButton2))p2ColorSelected = Red;
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), GreenButton2))p2ColorSelected = Green;
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), BlueButton2))p2ColorSelected = Blue;
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), VsPlayerButton))gamemode = vsPlayer;
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), VsBotButton))gamemode = vsBot;
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), ScreenSize1Button)){
 				screenSizeSelected = x800y450;
 				AdjustGameSize(screensize1.x, screensize1.y);
 				timerToClickAgain = cronometer + 1;			
 			}
-			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), ScreenSize2Button))
-			{
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), ScreenSize2Button)){
 				screenSizeSelected = x1200y675;
 				AdjustGameSize(screensize2.x, screensize2.y);
 				timerToClickAgain = cronometer + 1;
 			}
-			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), ScreenSize3Button))
-			{
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), ScreenSize3Button)){
 				screenSizeSelected = fullscreen;
 				FullscreenGameSize();
 				timerToClickAgain = cronometer+1;
 			}
 		}
-		switch (screenSizeSelected)
-		{
+		switch (screenSizeSelected){
 		case x800y450:
 			ScreenSize1Button.x = screenWidth / screenSizeSelectedButtonXDivider;
 			ScreenSize2Button.x = screenWidth / screenSizeNotSelectedButtonXDivider;
@@ -222,8 +194,7 @@ namespace catPong {
 		default:
 			break;
 		}
-		switch (p1ColorSelected)
-		{
+		switch (p1ColorSelected){
 		case Red:
 			RedButton.y = screenHeight / p1ColoredButtonsYDivider - screenHeight / selectedButtonDifference;
 			BlueButton.y = screenHeight / p1ColoredButtonsYDivider;
@@ -243,8 +214,7 @@ namespace catPong {
 			player1.color = BLUE;
 			break;
 		}
-		switch (p2ColorSelected)
-		{
+		switch (p2ColorSelected){
 		case Red:
 			RedButton2.y = screenHeight / p2ColoredButtonsYDivider - screenHeight / selectedButtonDifference;
 			BlueButton2.y = screenHeight / p2ColoredButtonsYDivider;
@@ -264,8 +234,7 @@ namespace catPong {
 			player2.color = BLUE;
 			break;
 		}
-		switch (gamemode)
-		{
+		switch (gamemode){
 		case vsPlayer:
 			VsPlayerButton.x = screenWidth / gamemodeSelectedButtonXDivider;
 			VsBotButton.x = screenWidth / gamemodeNotSelectedButtonXDivider;
@@ -306,8 +275,7 @@ namespace catPong {
 		EndDrawing();
 	}
 	void AdjustGameSize(int newWidth, int newHeight) {
-		if (screenWidth==GetMonitorWidth(0))
-		{
+		if (screenWidth==GetMonitorWidth(0)){
 			ToggleFullscreen();
 		}
 		screenWidth = newWidth;

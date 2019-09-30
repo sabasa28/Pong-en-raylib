@@ -10,15 +10,19 @@ Player player2;
 float paddle_height;
 float paddle_width; 
 int winner = 1;
-Image standing_cat;
+Image weirdCat;
 int total_points = 0;
 int winning_points = 10;
 bool botUsedPowerUP = false;
 int minTimeBetweenBotPwrUp = 8;
-static float xPosDividerP1 = 10.0f;
-static float xPosDividerP2 = 1.111111111f;
-static float playerSpeedDivider = 1.5f;
-float paddleTexOffsetXDivider = 44.44444f;
+const static float p1PosXDivider = 10.0f;
+const static float p2PosXDivider = 1.11111f;
+const static float playerSpeedDivider = 1.5f;
+const static float paddleTexWidthResizer = 7.0f;
+const static float paddleTexHeightResizer = 1.6f;
+float paddleTexOffsetXDivider = 27.0f;
+float paddleTexOffsetYDivider = 30.0f;
+
 namespace catPong {
 	void initPaddles() {
 		paddle_height = screenHeight / 7.5f;
@@ -29,8 +33,8 @@ namespace catPong {
 		player2.bar.height = paddle_height;
 		player1.bar.width = paddle_width;
 		player2.bar.width = paddle_width;
-		player1.bar.x = screenWidth / xPosDividerP1;
-		player2.bar.x = screenWidth / xPosDividerP2;
+		player1.bar.x = screenWidth / p1PosXDivider;
+		player2.bar.x = screenWidth / p2PosXDivider;
 		player1.bar.y = screenHeight / 2;
 		player2.bar.y = screenHeight / 2;
 
@@ -39,10 +43,10 @@ namespace catPong {
 	void initPaddleTex() {
 		player1.color = RED;
 		player2.color = BLUE;
-		standing_cat = LoadImage("imagenes/cat_standing.png");
-		ImageResize(&standing_cat, paddle_width * 4, paddle_height);
-		player1.textura = LoadTextureFromImage(standing_cat);
-		player2.textura = LoadTextureFromImage(standing_cat);
-		UnloadImage(standing_cat);
+		weirdCat = LoadImage("imagenes/gato_original.png");
+		ImageResize(&weirdCat, paddle_width *7, paddle_height*1.6);
+		player1.textura = LoadTextureFromImage(weirdCat);
+		player2.textura = LoadTextureFromImage(weirdCat);
+		UnloadImage(weirdCat);
 	}
 }

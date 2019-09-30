@@ -1,8 +1,7 @@
 #ifndef POWERUPS_H
 #define POWERUPS_H
 #include "raylib.h"
-struct PowerUPCharge
-{
+struct PowerUPCharge{
 	int x;
 	int y;
 	int radius;
@@ -24,13 +23,14 @@ extern float pwrUPMaxRespawnPosDivider;
 extern bool powerUPexists;
 extern bool powerUP2exists;
 extern Image mouse1;
-extern Image mouse2;
 extern Texture2D texturaPowerUP;
 extern Texture2D texturaPowerUP2;
 extern int lastTimer;
 extern int lastTimer2;
 extern int delayToRespawn;
-namespace catPong {
+extern float powerUPTexOffsetXDivider;
+extern float powerUPTexOffsetYDivider;
+namespace catPong{
 	void initPowerUP();
 	void initPowerUPTex();
 }

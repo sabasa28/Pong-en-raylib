@@ -6,7 +6,7 @@ extern Music metalNyan;
 extern Music nihaoNyan;
 extern Sound kittenMeow;
 extern Sound catMeow;
-namespace catPong {
+namespace catPong{
 	void initMusicSounds();
 }
 #endif // MUSICSOUNDS_H
