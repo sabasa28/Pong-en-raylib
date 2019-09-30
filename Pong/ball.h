@@ -18,15 +18,15 @@ extern Texture2D ballTexture;
 extern float leftResetPos;
 extern float rightResetPos;
 extern float speedMultiplier;
-extern float boost;
-extern float ballTexOffsetXDivider;
-extern float ballTexOffsetYDivider;
-extern float BallSpeed1XDivider;
-extern float BallSpeed1YDivider;
-extern float BallSpeed2XDivider;
-extern float BallSpeed2YDivider;
-extern float BallSpeed3XDivider;
-extern float BallSpeed3YDivider;
+extern const float boost;
+extern const float ballTexOffsetXDivider;
+extern const float ballTexOffsetYDivider;
+extern const float BallSpeed1XDivider;
+extern const float BallSpeed1YDivider;
+extern const float BallSpeed2XDivider;
+extern const float BallSpeed2YDivider;
+extern const float BallSpeed3XDivider;
+extern const float BallSpeed3YDivider;
 
 namespace catPong {
 	void initBall();

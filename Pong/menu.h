@@ -15,17 +15,7 @@ extern Rectangle ScreenSize1Button;
 extern Rectangle ScreenSize2Button;
 extern Rectangle ScreenSize3Button;
 
-enum ScreenSizeSelected{
-	x800y450,
-	x1200y675,
-	fullscreen,
-	none
-};
-enum ColorSelected{
-	Red,
-	Green,
-	Blue
-};
+
 
 namespace catPong {
 	void initMenu();

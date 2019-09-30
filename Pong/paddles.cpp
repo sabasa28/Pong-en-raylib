@@ -14,7 +14,7 @@ Image weirdCat;
 int total_points = 0;
 int winning_points = 10;
 bool botUsedPowerUP = false;
-int minTimeBetweenBotPwrUp = 8;
+const int minTimeBetweenBotPwrUp = 8;
 const static float p1PosXDivider = 10.0f;
 const static float p2PosXDivider = 1.11111f;
 const static float playerSpeedDivider = 1.5f;

@@ -16,19 +16,19 @@
 
 
 Gamemode gamemode = vsPlayer;
-static float PointsTextYDivider = 45.0f;
-static float PointsTextFontSizeDivider = 22.5f;
-static float p1PointsTextXDivider = 80.0f;
-static float p2PointsTextXDivider = 1.09589f;
-static float pauseTextFontSizeDivider = 15.0f;
-static float pauseTextXDivider = 3.47826f;
-static float pauseTextYDivider = 2.25f;
-static float controlsTextColumn1XDivider = 80.0f;
-static float controlsTextColumn2XDivider = 2.0f;
-static float controlsTextRow1YDivider = 1.50f;
-static float controlsTextRow2YDivider = 1.30f;
-static float controlsTextRow3YDivider = 1.20f;
-static float controlsTextRow4YDivider = 1.12f;
+const static float PointsTextYDivider = 45.0f;
+const static float PointsTextFontSizeDivider = 22.5f;
+const static float p1PointsTextXDivider = 80.0f;
+const static float p2PointsTextXDivider = 1.09589f;
+const static float pauseTextFontSizeDivider = 15.0f;
+const static float pauseTextXDivider = 3.47826f;
+const static float pauseTextYDivider = 2.25f;
+const static float controlsTextColumn1XDivider = 80.0f;
+const static float controlsTextColumn2XDivider = 2.0f;
+const static float controlsTextRow1YDivider = 1.50f;
+const static float controlsTextRow2YDivider = 1.30f;
+const static float controlsTextRow3YDivider = 1.20f;
+const static float controlsTextRow4YDivider = 1.12f;
 
 
 
@@ -133,11 +133,11 @@ namespace catPong {
 					ball.speed.x = screenWidth / BallSpeed1XDivider;
 					ball.speed.y = screenHeight / BallSpeed1YDivider;
 				}
-				if (ball.position.y > player1.bar.y +player1.bar.height- player1.bar.height/3 && ball.position.y < player1.bar.y + player1.bar.height - player1.bar.height/6){
+				if (ball.position.y > player1.bar.y + player1.bar.height - player1.bar.height / 3 && ball.position.y < player1.bar.y + player1.bar.height - player1.bar.height / 6) {
 					ball.speed.x = screenWidth / BallSpeed2XDivider;
 					ball.speed.y = screenHeight / BallSpeed2YDivider;
 				}
-				if (ball.position.y > player1.bar.y + player1.bar.height / 2 && ball.position.y < player1.bar.y + player1.bar.height - player1.bar.height/3){
+				if (ball.position.y > player1.bar.y + player1.bar.height / 2 && ball.position.y < player1.bar.y + player1.bar.height - player1.bar.height / 3) {
 					ball.speed.x = screenWidth / BallSpeed3XDivider;
 					ball.speed.y = screenHeight / BallSpeed3YDivider;
 				}
@@ -210,10 +210,14 @@ namespace catPong {
 		case 1:DrawCircle(pwrUPcharge6.x, pwrUPcharge6.y, static_cast<float>(pwrUPcharge6.radius), YELLOW);	 
 		case 0:break;
 		}
+
 		if (powerUPexists == true)DrawTexture(texturaPowerUP, static_cast<int>(PowerUP1.x- screenWidth / powerUPTexOffsetXDivider), static_cast<int>(PowerUP1.y - screenHeight / powerUPTexOffsetYDivider), WHITE);
 		if (powerUP2exists == true)DrawTexture(texturaPowerUP2, static_cast<int>(PowerUP2.x - screenWidth / powerUPTexOffsetXDivider), static_cast<int>(PowerUP2.y - screenHeight / powerUPTexOffsetYDivider), DARKPURPLE);
-		if (ball.invisibility == false)DrawTexture(ballTexture, static_cast<int>(ball.position.x - screenWidth/ballTexOffsetXDivider), static_cast<int>(ball.position.y - screenHeight/ballTexOffsetYDivider), ball.color);
-		if (ball.invisibility == true && cronometerFlo >= (ball.invisibilityTimer + 1.0f))ball.invisibility = false;
+		if (ball.invisibility == false) {
+			DrawCircle(ball.position.x, ball.position.y, ball.radius, BLACK);
+			DrawTexture(ballTexture, static_cast<int>(ball.position.x - screenWidth / ballTexOffsetXDivider), static_cast<int>(ball.position.y - screenHeight / ballTexOffsetYDivider), ball.color);
+		}
+		if (ball.invisibility == true && cronometerFlo >= (ball.invisibilityTimer + 1.0f))ball.invisibility = false;//ESO NO VA ACA, va en update
 		DrawTexture(player1.textura, static_cast<int>(player1.bar.x - screenWidth / paddleTexOffsetXDivider), static_cast<int>(player1.bar.y - screenHeight / paddleTexOffsetYDivider), player1.color);
 		DrawTexture(player2.textura, static_cast<int>(player2.bar.x - screenWidth / paddleTexOffsetXDivider), static_cast<int>(player2.bar.y - screenHeight / paddleTexOffsetYDivider), player2.color);
 		DrawTexture(player1.textura, static_cast<int>(player1.bar.x - screenWidth / paddleTexOffsetXDivider), static_cast<int>(player1.bar.y - screenHeight / paddleTexOffsetYDivider), player1.color);

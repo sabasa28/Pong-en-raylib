@@ -20,7 +20,7 @@ extern int winner;
 extern int total_points;
 extern int winning_points;
 extern bool botUsedPowerUP;
-extern int minTimeBetweenBotPwrUp;
+extern const int minTimeBetweenBotPwrUp;
 extern float paddleTexOffsetXDivider;
 extern float paddleTexOffsetYDivider;
 namespace catPong{

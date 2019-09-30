@@ -6,6 +6,7 @@
 #include "gameplay.h"
 
 State gamestate;
+
 namespace catPong {
 	void executeGame() {
 		initGeneral();

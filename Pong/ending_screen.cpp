@@ -8,19 +8,19 @@
 #include "game.h"
 #include "general.h"
 
-static float winnerTextFontDivider = 9.0f;
-static float winnerTextYDivider = 4.090909f;
-static float winner1TextXDivider = 4.44444444f;
-static float winner2TextXDivider = 1.77777778f;
-static float optionsTextXDivider = 10.0f;
-static float optionsTextFontDivider = 15.0f;
-static float restartTextYDivider = 1.8f;
-static float menuTextYDivider = 1.5517242f;
-static float quitTextYDivider = 1.3636364f;
-static float matchesTextFontDivider = 22.5f;
-static float matchesTextXDivider = 1.6f;
-static float matchesP1TextYDivider = 1.3636364f;
-static float matchesP2TextYDivider = 1.25f;
+const static float winnerTextFontDivider = 9.0f;
+const static float winnerTextYDivider = 4.090909f;
+const static float winner1TextXDivider = 4.44444444f;
+const static float winner2TextXDivider = 1.77777778f;
+const static float optionsTextXDivider = 10.0f;
+const static float optionsTextFontDivider = 15.0f;
+const static float restartTextYDivider = 1.8f;
+const static float menuTextYDivider = 1.5517242f;
+const static float quitTextYDivider = 1.3636364f;
+const static float matchesTextFontDivider = 22.5f;
+const static float matchesTextXDivider = 1.6f;
+const static float matchesP1TextYDivider = 1.3636364f;
+const static float matchesP2TextYDivider = 1.25f;
 
 namespace catPong {
 	void updateEndingScreen() {

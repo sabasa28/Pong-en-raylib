@@ -9,16 +9,16 @@ Texture2D ballTexture;
 float leftResetPos;
 float rightResetPos;
 float speedMultiplier = 1.0f;
-float boost = 0.05f;
-float ballTexOffsetXDivider = 29.62963f;
-float ballTexOffsetYDivider = 26.47059f;
-float BallSpeed1XDivider = 2.28571f;
-float BallSpeed1YDivider = 1.28571f;
-float BallSpeed2XDivider = 1.93939f;
-float BallSpeed2YDivider = 2.4f;
-float BallSpeed3XDivider = 1.68421f;
-float BallSpeed3YDivider = 3.6f;
-static float BallRadiusDivider = 45.0f;
+const float boost = 0.05f;
+const float ballTexOffsetXDivider = 45.0f;
+const float ballTexOffsetYDivider = 23.0f;
+const float BallSpeed1XDivider = 2.28571f;
+const float BallSpeed1YDivider = 1.28571f;
+const float BallSpeed2XDivider = 1.93939f;
+const float BallSpeed2YDivider = 2.4f;
+const float BallSpeed3XDivider = 1.68421f;
+const float BallSpeed3YDivider = 3.6f;
+const static float BallRadiusDivider = 45.0f;
 
 namespace catPong{
 	void initBall(){
@@ -33,7 +33,7 @@ namespace catPong{
 	}
 
 	void initBallTex(){
-		worsted = LoadImage("imagenes/estambre_rojo.png");
+		worsted = LoadImage("imagenes/bola1.png");
 		ImageResize(&worsted, ball.radius * 4, ball.radius * 4);
 		ballTexture = LoadTextureFromImage(worsted);
 		UnloadImage(worsted);
