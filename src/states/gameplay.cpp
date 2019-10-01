@@ -5,14 +5,14 @@
 
 #include "raylib.h"
 
-#include "powerUPs.h"
-#include "paddles.h"
-#include "console.h"
-#include "ball.h"
-#include "musicSounds.h"
-#include "game.h"
-#include "background.h"
-#include "general.h"
+#include "game_elements/powerUPs.h"
+#include "game_elements/paddles.h"
+#include "general/console.h"
+#include "game_elements/ball.h"
+#include "assets/musicSounds.h"
+#include "states/game.h"
+#include "assets/background.h"
+#include "general/general.h"
 
 
 Gamemode gamemode = vsPlayer;

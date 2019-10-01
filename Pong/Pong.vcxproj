@@ -18,6 +18,33 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\assets\background.cpp" />
+    <ClCompile Include="..\src\assets\musicsounds.cpp" />
+    <ClCompile Include="..\src\game_elements\ball.cpp" />
+    <ClCompile Include="..\src\game_elements\paddles.cpp" />
+    <ClCompile Include="..\src\game_elements\powerUPs.cpp" />
+    <ClCompile Include="..\src\general\console.cpp" />
+    <ClCompile Include="..\src\general\general.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\states\ending_screen.cpp" />
+    <ClCompile Include="..\src\states\game.cpp" />
+    <ClCompile Include="..\src\states\gameplay.cpp" />
+    <ClCompile Include="..\src\states\menu.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\assets\background.h" />
+    <ClInclude Include="..\src\assets\musicSounds.h" />
+    <ClInclude Include="..\src\game_elements\ball.h" />
+    <ClInclude Include="..\src\game_elements\paddles.h" />
+    <ClInclude Include="..\src\game_elements\powerUPs.h" />
+    <ClInclude Include="..\src\general\console.h" />
+    <ClInclude Include="..\src\general\general.h" />
+    <ClInclude Include="..\src\states\ending_screen.h" />
+    <ClInclude Include="..\src\states\game.h" />
+    <ClInclude Include="..\src\states\gameplay.h" />
+    <ClInclude Include="..\src\states\menu.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{B6A1F58D-CE51-4F5A-B37A-9AE8100A0F93}</ProjectGuid>
@@ -93,7 +120,10 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)raylib-2.5.0-Win32-msvc15\bin\raylib.dll" "$(OutDir)"</Command>
+      <Command>copy "$(SolutionDir)raylib-2.5.0-Win32-msvc15\bin\raylib.dll" "$(OutDir)" /Y
+mkdir "$(OutDir)assets"
+xcopy "$(SolutionDir)resources\assets" "$(OutDir)assets" /s /y
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -104,7 +134,10 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)raylib-2.5.0-Win32-msvc15\bin\raylib.dll" "$(OutDir)"</Command>
+      <Command>copy "$(SolutionDir)raylib-2.5.0-Win32-msvc15\bin\raylib.dll" "$(OutDir)" /Y
+mkdir "$(OutDir)assets"
+xcopy "$(SolutionDir)resources\assets" "$(OutDir)assets" /s /y
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -128,7 +161,10 @@
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)raylib-2.5.0-Win32-msvc15\bin\raylib.dll" "$(OutDir)"</Command>
+      <Command>copy "$(SolutionDir)raylib-2.5.0-Win32-msvc15\bin\raylib.dll" "$(OutDir)" /Y
+mkdir "$(OutDir)assets"
+xcopy "$(SolutionDir)resources\assets" "$(OutDir)assets" /s /y
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -145,36 +181,12 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)raylib-2.5.0-Win32-msvc15\bin\raylib.dll" "$(OutDir)"</Command>
+      <Command>copy "$(SolutionDir)raylib-2.5.0-Win32-msvc15\bin\raylib.dll" "$(OutDir)" /Y
+mkdir "$(OutDir)assets"
+xcopy "$(SolutionDir)resources\assets" "$(OutDir)assets" /s /y
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="background.cpp" />
-    <ClCompile Include="ball.cpp" />
-    <ClCompile Include="console.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="ending_screen.cpp" />
-    <ClCompile Include="game.cpp" />
-    <ClCompile Include="gameplay.cpp" />
-    <ClCompile Include="general.cpp" />
-    <ClCompile Include="menu.cpp" />
-    <ClCompile Include="musicsounds.cpp" />
-    <ClCompile Include="paddles.cpp" />
-    <ClCompile Include="powerUPs.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="background.h" />
-    <ClInclude Include="ball.h" />
-    <ClInclude Include="console.h" />
-    <ClInclude Include="ending_screen.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="gameplay.h" />
-    <ClInclude Include="general.h" />
-    <ClInclude Include="menu.h" />
-    <ClInclude Include="musicsounds.h" />
-    <ClInclude Include="paddles.h" />
-    <ClInclude Include="powerUPs.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

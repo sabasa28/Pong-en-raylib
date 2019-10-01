@@ -2,7 +2,7 @@
 
 #include "raylib.h"
 
-#include "console.h"
+#include "general/console.h"
 Ball ball;
 Image worsted;
 Texture2D ballTexture;
@@ -33,7 +33,7 @@ namespace catPong{
 	}
 
 	void initBallTex(){
-		worsted = LoadImage("imagenes/bola1.png");
+		worsted = LoadImage("assets/imagenes/bola1.png");
 		ImageResize(&worsted, ball.radius * 4, ball.radius * 4);
 		ballTexture = LoadTextureFromImage(worsted);
 		UnloadImage(worsted);

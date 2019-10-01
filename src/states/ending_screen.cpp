@@ -2,11 +2,11 @@
 
 #include "raylib.h"
 
-#include "musicSounds.h"
-#include "paddles.h"
-#include "console.h"
-#include "game.h"
-#include "general.h"
+#include "assets/musicSounds.h"
+#include "game_elements/paddles.h"
+#include "general/console.h"
+#include "states/game.h"
+#include "general/general.h"
 
 const static float winnerTextFontDivider = 9.0f;
 const static float winnerTextYDivider = 4.090909f;

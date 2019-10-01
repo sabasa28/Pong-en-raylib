@@ -1,9 +1,9 @@
-#include "game.h"
+#include "states/game.h"
 
-#include "menu.h"
-#include "ending_screen.h"
-#include "general.h"
-#include "gameplay.h"
+#include "states/menu.h"
+#include "states/ending_screen.h"
+#include "general/general.h"
+#include "states/gameplay.h"
 
 State gamestate;
 

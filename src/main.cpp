@@ -1,4 +1,4 @@
-#include "game.h"
+#include "states/game.h"
 
 void main(){
 	catPong::executeGame();

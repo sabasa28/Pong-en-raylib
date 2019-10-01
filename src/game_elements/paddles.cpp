@@ -2,8 +2,8 @@
 
 #include "raylib.h"
 
-#include "console.h"
-#include "game.h"
+#include "general/console.h"
+#include "states/game.h"
 
 Player player1;
 Player player2;
@@ -43,7 +43,7 @@ namespace catPong {
 	void initPaddleTex() {
 		player1.color = RED;
 		player2.color = BLUE;
-		weirdCat = LoadImage("imagenes/gato_original.png");
+		weirdCat = LoadImage("assets/imagenes/gato_original.png");
 		ImageResize(&weirdCat, paddle_width *7, paddle_height*1.6);
 		player1.textura = LoadTextureFromImage(weirdCat);
 		player2.textura = LoadTextureFromImage(weirdCat);

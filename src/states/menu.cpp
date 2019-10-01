@@ -2,15 +2,15 @@
 
 #include "raylib.h"
 
-#include "background.h"
-#include "game.h"
-#include "paddles.h"
-#include "musicSounds.h"
-#include "console.h"
-#include "general.h"
-#include "gameplay.h"
-#include "ball.h"
-#include "powerUPs.h"
+#include "assets/background.h"
+#include "states/game.h"
+#include "game_elements/paddles.h"
+#include "assets/musicSounds.h"
+#include "general/console.h"
+#include "general/general.h"
+#include "states/gameplay.h"
+#include "game_elements/ball.h"
+#include "game_elements/powerUPs.h"
 
 Rectangle PlayButton;
 Rectangle ExitButton;

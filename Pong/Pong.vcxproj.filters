@@ -1,90 +1,94 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Archivos de origen">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Archivos de encabezado">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Archivos de recursos">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de recursos\game elements">
+      <UniqueIdentifier>{bdfdc5b7-3321-48af-8571-3bffb4d16538}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de recursos\general">
+      <UniqueIdentifier>{90a08ad4-e2aa-4c81-bf39-fb6abf6a3a56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de recursos\states">
+      <UniqueIdentifier>{dab271c6-3720-4612-9542-34dd639c4a35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de recursos\assets">
+      <UniqueIdentifier>{314d9b9d-7e82-4287-9cda-49bb0f71ea3c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ball.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>Archivos de recursos</Filter>
     </ClCompile>
-    <ClCompile Include="console.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="..\src\general\console.cpp">
+      <Filter>Archivos de recursos\general</Filter>
     </ClCompile>
-    <ClCompile Include="paddles.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="..\src\general\general.cpp">
+      <Filter>Archivos de recursos\general</Filter>
     </ClCompile>
-    <ClCompile Include="powerUPs.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="..\src\assets\background.cpp">
+      <Filter>Archivos de recursos\assets</Filter>
     </ClCompile>
-    <ClCompile Include="background.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="..\src\assets\musicsounds.cpp">
+      <Filter>Archivos de recursos\assets</Filter>
     </ClCompile>
-    <ClCompile Include="menu.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="..\src\states\ending_screen.cpp">
+      <Filter>Archivos de recursos\states</Filter>
     </ClCompile>
-    <ClCompile Include="game.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="..\src\states\game.cpp">
+      <Filter>Archivos de recursos\states</Filter>
     </ClCompile>
-    <ClCompile Include="ending_screen.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="..\src\states\gameplay.cpp">
+      <Filter>Archivos de recursos\states</Filter>
     </ClCompile>
-    <ClCompile Include="general.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="..\src\states\menu.cpp">
+      <Filter>Archivos de recursos\states</Filter>
     </ClCompile>
-    <ClCompile Include="gameplay.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="..\src\game_elements\ball.cpp">
+      <Filter>Archivos de recursos\game elements</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="..\src\game_elements\paddles.cpp">
+      <Filter>Archivos de recursos\game elements</Filter>
     </ClCompile>
-    <ClCompile Include="musicsounds.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="..\src\game_elements\powerUPs.cpp">
+      <Filter>Archivos de recursos\game elements</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ball.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="..\src\general\console.h">
+      <Filter>Archivos de recursos\general</Filter>
     </ClInclude>
-    <ClInclude Include="console.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="..\src\general\general.h">
+      <Filter>Archivos de recursos\general</Filter>
     </ClInclude>
-    <ClInclude Include="paddles.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="..\src\assets\background.h">
+      <Filter>Archivos de recursos\assets</Filter>
     </ClInclude>
-    <ClInclude Include="powerUPs.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="..\src\assets\musicSounds.h">
+      <Filter>Archivos de recursos\assets</Filter>
     </ClInclude>
-    <ClInclude Include="background.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="..\src\states\ending_screen.h">
+      <Filter>Archivos de recursos\states</Filter>
     </ClInclude>
-    <ClInclude Include="menu.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="..\src\states\game.h">
+      <Filter>Archivos de recursos\states</Filter>
     </ClInclude>
-    <ClInclude Include="game.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="..\src\states\gameplay.h">
+      <Filter>Archivos de recursos\states</Filter>
     </ClInclude>
-    <ClInclude Include="ending_screen.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="..\src\states\menu.h">
+      <Filter>Archivos de recursos\states</Filter>
     </ClInclude>
-    <ClInclude Include="general.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="..\src\game_elements\ball.h">
+      <Filter>Archivos de recursos\game elements</Filter>
     </ClInclude>
-    <ClInclude Include="gameplay.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="..\src\game_elements\paddles.h">
+      <Filter>Archivos de recursos\game elements</Filter>
     </ClInclude>
-    <ClInclude Include="musicsounds.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="..\src\game_elements\powerUPs.h">
+      <Filter>Archivos de recursos\game elements</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

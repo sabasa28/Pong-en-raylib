@@ -2,7 +2,7 @@
 
 #include "raylib.h"
 
-#include "console.h"
+#include "general/console.h"
 
 
 PowerUPCharge pwrUPcharge1;
@@ -41,7 +41,7 @@ int lastTimer = 0;
 int lastTimer2 = 0;
 const int delayToRespawn = 15;
 const static float heightDivider = 15.0f;
-const static float widthDivider = 26.666666667f;
+const static float widthDivider = 26.666666667f; 
 const float powerUPTexOffsetXDivider = 50.0f;
 const float powerUPTexOffsetYDivider = 60.0f;
 namespace catPong {
@@ -87,7 +87,7 @@ namespace catPong {
 	}
 
 	void initPowerUPTex() {
-		mouse1 = LoadImage("imagenes/PowerUP.png");
+		mouse1 = LoadImage("assets/imagenes/PowerUP.png");
 		ImageResize(&mouse1, PowerUP1.width*2.4f, PowerUP1.height*2);
 		texturaPowerUP = LoadTextureFromImage(mouse1);
 		texturaPowerUP2 = LoadTextureFromImage(mouse1);

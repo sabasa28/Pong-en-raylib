@@ -6,13 +6,13 @@
 #include "raylib.h"
 
 #include "console.h"
-#include "paddles.h"
-#include "powerUPs.h"
-#include "ball.h"
-#include "musicSounds.h"
-#include "background.h"
-#include "menu.h"
-#include "game.h"
+#include "game_elements/paddles.h"
+#include "game_elements/powerUPs.h"
+#include "game_elements/ball.h"
+#include "assets/musicSounds.h"
+#include "assets/background.h"
+#include "states/menu.h"
+#include "states/game.h"
 
 
 namespace catPong {
