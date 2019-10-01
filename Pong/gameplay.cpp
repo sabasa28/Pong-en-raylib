@@ -37,19 +37,19 @@ const static float controlsTextRow4YDivider = 1.12f;
 
 namespace catPong {
 	void updateGameplay() {
-		PlayMusicStream(nihaoNyan);
-		UpdateMusicStream(nihaoNyan);
+		PlayMusicStream(gameSong);
+		UpdateMusicStream(gameSong);
 		DrawTexture(texturaFondo, 0, 0, WHITE);
 		cronometer = static_cast<int>(clock() / 1000);
 		cronometerFlo = static_cast<float>(clock()) / 1000;
 		if (player1.points >= winning_points){
 			player1.wonMatches += 1;
-			StopMusicStream(nihaoNyan);
+			StopMusicStream(gameSong);
 			gamestate = EndScreen;
 		}
 		if (player2.points >= winning_points){
 			player2.wonMatches += 1;
-			StopMusicStream(nihaoNyan);
+			StopMusicStream(gameSong);
 			gamestate = EndScreen;
 		}
 		if (IsKeyPressed(KEY_SPACE)) pause = !pause;
@@ -116,7 +116,7 @@ namespace catPong {
 			}
 			ball.position.x += ball.speed.x*GetFrameTime()*speedMultiplier;
 			ball.position.y += ball.speed.y*GetFrameTime()*speedMultiplier;
-			if (CheckCollisionCircleRec(ball.position, static_cast<float>(ball.radius), player1.bar) && ball.speed.x<0) {//MAGIC NUMBERS
+			if (CheckCollisionCircleRec(ball.position, static_cast<float>(ball.radius), player1.bar) && ball.speed.x<0) {
 				if (ball.position.y < player1.bar.y + player1.bar.height / 6){
 					ball.speed.x = screenWidth / BallSpeed1XDivider;
 					ball.speed.y = - (screenHeight / BallSpeed1YDivider);
@@ -145,7 +145,7 @@ namespace catPong {
 				ball.lastPlayerHit = 1;
 				PlaySound(kittenMeow);
 			}
-			if (CheckCollisionCircleRec(ball.position, static_cast<float>(ball.radius), player2.bar)&& ball.speed.x > 0) { //MAGIC NUMBERS
+			if (CheckCollisionCircleRec(ball.position, static_cast<float>(ball.radius), player2.bar)&& ball.speed.x > 0) {
 				if (ball.position.y < player2.bar.y + player2.bar.height / 6) {
 					ball.speed.x = -(screenWidth / BallSpeed1XDivider);
 					ball.speed.y = -(screenHeight / BallSpeed1YDivider);
@@ -187,6 +187,7 @@ namespace catPong {
 			}
 			if (ball.position.y >= (screenHeight - ball.radius) && ball.speed.y > 0) ball.speed.y *= -1.0f;
 			if (ball.position.y <= ball.radius && ball.speed.y < 0) ball.speed.y *= -1.0f;
+			if (ball.invisibility == true && cronometerFlo >= (ball.invisibilityTimer + 1.0f))ball.invisibility = false;
 		}
 	}
 	void drawGameplay(){
@@ -214,10 +215,9 @@ namespace catPong {
 		if (powerUPexists == true)DrawTexture(texturaPowerUP, static_cast<int>(PowerUP1.x- screenWidth / powerUPTexOffsetXDivider), static_cast<int>(PowerUP1.y - screenHeight / powerUPTexOffsetYDivider), WHITE);
 		if (powerUP2exists == true)DrawTexture(texturaPowerUP2, static_cast<int>(PowerUP2.x - screenWidth / powerUPTexOffsetXDivider), static_cast<int>(PowerUP2.y - screenHeight / powerUPTexOffsetYDivider), DARKPURPLE);
 		if (ball.invisibility == false) {
-			DrawCircle(ball.position.x, ball.position.y, ball.radius, BLACK);
+			DrawCircle(ball.position.x, ball.position.y, static_cast<int>(ball.radius), BLACK);
 			DrawTexture(ballTexture, static_cast<int>(ball.position.x - screenWidth / ballTexOffsetXDivider), static_cast<int>(ball.position.y - screenHeight / ballTexOffsetYDivider), ball.color);
 		}
-		if (ball.invisibility == true && cronometerFlo >= (ball.invisibilityTimer + 1.0f))ball.invisibility = false;//ESO NO VA ACA, va en update
 		DrawTexture(player1.textura, static_cast<int>(player1.bar.x - screenWidth / paddleTexOffsetXDivider), static_cast<int>(player1.bar.y - screenHeight / paddleTexOffsetYDivider), player1.color);
 		DrawTexture(player2.textura, static_cast<int>(player2.bar.x - screenWidth / paddleTexOffsetXDivider), static_cast<int>(player2.bar.y - screenHeight / paddleTexOffsetYDivider), player2.color);
 		DrawTexture(player1.textura, static_cast<int>(player1.bar.x - screenWidth / paddleTexOffsetXDivider), static_cast<int>(player1.bar.y - screenHeight / paddleTexOffsetYDivider), player1.color);
@@ -226,14 +226,14 @@ namespace catPong {
 		DrawText(TextFormat("P2: %i", player2.points), static_cast<int>(screenWidth / p2PointsTextXDivider), static_cast<int>(screenHeight / PointsTextYDivider), static_cast<int>(screenHeight / PointsTextFontSizeDivider), player2.color);
 		if (pause==true && (cronometer % 2 == 0)) DrawText("PRESS SPACE TO PLAY", static_cast<int>(screenWidth / pauseTextXDivider), static_cast<int>(screenHeight / pauseTextYDivider), static_cast<int>(screenHeight / pauseTextFontSizeDivider), ORANGE);
 		if (pause) {
-			DrawText("Player1:", screenWidth / controlsTextColumn1XDivider, screenHeight / controlsTextRow1YDivider, screenHeight / pauseTextFontSizeDivider, player1.color);
-			DrawText("Player2:", screenWidth / controlsTextColumn2XDivider, screenHeight / controlsTextRow1YDivider, screenHeight / pauseTextFontSizeDivider, player2.color);
-			DrawText("Up = W", screenWidth / controlsTextColumn1XDivider, screenHeight / controlsTextRow2YDivider, screenHeight / pauseTextFontSizeDivider, ORANGE);
-			DrawText("Up = Arrow-up", screenWidth / controlsTextColumn2XDivider, screenHeight / controlsTextRow2YDivider, screenHeight / pauseTextFontSizeDivider, ORANGE);
-			DrawText("Down = S", screenWidth / controlsTextColumn1XDivider, screenHeight / controlsTextRow3YDivider, screenHeight / pauseTextFontSizeDivider, ORANGE);
-			DrawText("Down = Arrow-down", screenWidth / controlsTextColumn2XDivider, screenHeight / controlsTextRow3YDivider, screenHeight / pauseTextFontSizeDivider, ORANGE);
-			DrawText("Gravity = Left ctrl", screenWidth / controlsTextColumn1XDivider, screenHeight / controlsTextRow4YDivider, screenHeight / pauseTextFontSizeDivider, ORANGE);
-			DrawText("Gravity = Right ctrl", screenWidth / controlsTextColumn2XDivider, screenHeight / controlsTextRow4YDivider, screenHeight / pauseTextFontSizeDivider, ORANGE);
+			DrawText("Player1:", static_cast<int>(screenWidth / controlsTextColumn1XDivider), static_cast<int>(screenHeight / controlsTextRow1YDivider), static_cast<int>(screenHeight / pauseTextFontSizeDivider), player1.color);
+			DrawText("Player2:", static_cast<int>(screenWidth / controlsTextColumn2XDivider), static_cast<int>(screenHeight / controlsTextRow1YDivider), static_cast<int>(screenHeight / pauseTextFontSizeDivider), player2.color);
+			DrawText("Up = W", static_cast<int>(screenWidth / controlsTextColumn1XDivider), static_cast<int>(screenHeight / controlsTextRow2YDivider), static_cast<int>(screenHeight / pauseTextFontSizeDivider), ORANGE);
+			DrawText("Up = Arrow-up", static_cast<int>(screenWidth / controlsTextColumn2XDivider), static_cast<int>(screenHeight / controlsTextRow2YDivider), static_cast<int>(screenHeight / pauseTextFontSizeDivider), ORANGE);
+			DrawText("Down = S", static_cast<int>(screenWidth / controlsTextColumn1XDivider), static_cast<int>(screenHeight / controlsTextRow3YDivider), static_cast<int>(screenHeight / pauseTextFontSizeDivider), ORANGE);
+			DrawText("Down = Arrow-down", static_cast<int>(screenWidth / controlsTextColumn2XDivider), static_cast<int>(screenHeight / controlsTextRow3YDivider), static_cast<int>(screenHeight / pauseTextFontSizeDivider), ORANGE);
+			DrawText("Gravity = Left ctrl", static_cast<int>(screenWidth / controlsTextColumn1XDivider), static_cast<int>(screenHeight / controlsTextRow4YDivider), static_cast<int>(screenHeight / pauseTextFontSizeDivider), ORANGE);
+			DrawText("Gravity = Right ctrl", static_cast<int>(screenWidth / controlsTextColumn2XDivider), static_cast<int>(screenHeight / controlsTextRow4YDivider), static_cast<int>(screenHeight / pauseTextFontSizeDivider), ORANGE);
 		}
 		EndDrawing();
 	}

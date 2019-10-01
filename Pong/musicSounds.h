@@ -3,7 +3,6 @@
 #include "raylib.h"
 extern Music menuSong;
 extern Music gameSong;
-extern Music nihaoNyan;
 extern Sound kittenMeow;
 extern Sound catMeow;
 namespace catPong{

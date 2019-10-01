@@ -58,6 +58,7 @@ namespace catPong {
 		UnloadTexture(player1.textura);
 		UnloadTexture(player2.textura);
 		UnloadSound(kittenMeow);
+		UnloadSound(catMeow);
 		UnloadMusicStream(menuSong);
 		UnloadMusicStream(gameSong);
 		CloseAudioDevice();
