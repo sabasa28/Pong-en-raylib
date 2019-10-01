@@ -24,8 +24,8 @@ const static float matchesP2TextYDivider = 1.25f;
 
 namespace catPong {
 	void updateEndingScreen() {
-		PlayMusicStream(metalNyan);
-		UpdateMusicStream(metalNyan);
+		PlayMusicStream(gameSong);
+		UpdateMusicStream(gameSong);
 		if (player1.points >= winning_points){
 			winner = 1;
 		}
@@ -33,11 +33,11 @@ namespace catPong {
 			winner = 2;
 		}
 		if (IsKeyPressed('M')) {
-			StopMusicStream(metalNyan);
+			StopMusicStream(gameSong);
 			gamestate = Menu;
 		}
 		if (IsKeyPressed('R')) {
-			StopMusicStream(metalNyan);
+			StopMusicStream(gameSong);
 			gamestate = Gameplay;
 		}
 		resetValues();

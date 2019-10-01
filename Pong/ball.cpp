@@ -22,13 +22,13 @@ const static float BallRadiusDivider = 45.0f;
 
 namespace catPong{
 	void initBall(){
-		leftResetPos = screenWidth / 8;
-		rightResetPos = screenWidth - screenWidth / 8;
-		ball.position.x = screenWidth / 2;
-		ball.position.y = screenHeight / 2;
-		ball.speed.x = screenWidth/ BallSpeed1XDivider;
-		ball.speed.y = screenHeight / BallSpeed1YDivider;
-		ball.radius = screenHeight / BallRadiusDivider;
+		leftResetPos = static_cast<float>(screenWidth) / 8;
+		rightResetPos = static_cast<float>(screenWidth) - static_cast<float>(screenWidth) / 8;
+		ball.position.x = static_cast<float>(screenWidth) / 2;
+		ball.position.y = static_cast<float>(screenHeight) / 2;
+		ball.speed.x = static_cast<float>(screenWidth)/ BallSpeed1XDivider;
+		ball.speed.y = static_cast<float>(screenHeight) / BallSpeed1YDivider;
+		ball.radius = static_cast<int>(screenHeight / BallRadiusDivider);
 		ball.color = YELLOW;
 	}
 

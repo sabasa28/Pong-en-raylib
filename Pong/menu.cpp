@@ -148,8 +148,8 @@ namespace catPong {
 		ScreenSize3Button.height = screenHeight / screenSizeButtonsHeightDivider;
 	}
 	void updateMenu() {
-		PlayMusicStream(gatitos);
-		UpdateMusicStream(gatitos);
+		PlayMusicStream(menuSong);
+		UpdateMusicStream(menuSong);
 		player1.wonMatches = 0;
 		player2.wonMatches = 0;
 		
@@ -157,7 +157,7 @@ namespace catPong {
 		if (cronometer >= timerToClickAgain) {
 			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), ExitButton)) gamestate = Close;
 			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), PlayButton)) {
-				StopMusicStream(gatitos);
+				StopMusicStream(menuSong);
 				gamestate = Gameplay;
 			}
 			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), RedButton))p1ColorSelected = Red;

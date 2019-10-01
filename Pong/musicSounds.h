@@ -1,8 +1,8 @@
 #ifndef MUSICSOUNDS_H
 #define MUSICSOUNDS_H
 #include "raylib.h"
-extern Music gatitos;
-extern Music metalNyan;
+extern Music menuSong;
+extern Music gameSong;
 extern Music nihaoNyan;
 extern Sound kittenMeow;
 extern Sound catMeow;

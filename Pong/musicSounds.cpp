@@ -2,8 +2,8 @@
 
 #include "raylib.h"
 
-Music gatitos;
-Music metalNyan;
+Music menuSong;
+Music gameSong;
 Music nihaoNyan;
 static Wave kittenMeowWav;
 static Wave catMeowWav;
@@ -13,8 +13,8 @@ Sound catMeow;
 
 namespace catPong {
 	void initMusicSounds() {
-		gatitos = LoadMusicStream("sonidos/gatitos_song.ogg");
-		metalNyan = LoadMusicStream("sonidos/nyanHype.ogg");
+		menuSong = LoadMusicStream("sonidos/menus_song.ogg");
+		gameSong = LoadMusicStream("sonidos/game_song.ogg");
 		nihaoNyan = LoadMusicStream("sonidos/NyanNyan_RockVersion.ogg");
 		kittenMeowWav = LoadWave("sonidos/kitten_meow.wav");
 		catMeowWav = LoadWave("sonidos/cat_meow.wav");
@@ -22,7 +22,7 @@ namespace catPong {
 		catMeow = LoadSoundFromWave(catMeowWav);
 		UnloadWave(kittenMeowWav);
 		UnloadWave(catMeowWav);
-		SetMusicVolume(metalNyan, 0.25f);
+		SetMusicVolume(gameSong, 0.25f);
 		SetSoundVolume(kittenMeow, 1.0f);
 		SetSoundVolume(catMeow, 0.3f);
 	}
