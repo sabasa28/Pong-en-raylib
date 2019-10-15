@@ -18,8 +18,8 @@
 namespace catPong {
 	void initGeneral() {
 		initConsole();
-		srand(time(NULL));
-		InitWindow(screensize1.x, screensize1.y, "PONG - Inaki Diez Galarza");//(Iñaki)
+		srand(static_cast<unsigned int>(time(NULL)));
+		InitWindow(static_cast<int>(screensize1.x), static_cast<int>(screensize1.y), "PONG - Inaki Diez Galarza");//(Iñaki)
 		InitAudioDevice();
 		initPaddles();
 		initPaddleTex();
@@ -36,8 +36,8 @@ namespace catPong {
 	void resetValues() {
 		initPaddles();
 		speedMultiplier = 1.0f;
-		ball.position.x = screenWidth / 2;
-		ball.position.y = screenHeight / 2;
+		ball.position.x = static_cast<float>(screenWidth) / 2;
+		ball.position.y = static_cast<float>(screenHeight) / 2;
 		player1.points = 0;
 		player2.points = 0;
 		total_points = 0;

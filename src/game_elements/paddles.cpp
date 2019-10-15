@@ -33,10 +33,10 @@ namespace catPong {
 		player2.bar.height = paddle_height;
 		player1.bar.width = paddle_width;
 		player2.bar.width = paddle_width;
-		player1.bar.x = screenWidth / p1PosXDivider;
-		player2.bar.x = screenWidth / p2PosXDivider;
-		player1.bar.y = screenHeight / 2;
-		player2.bar.y = screenHeight / 2;
+		player1.bar.x = static_cast<float>(screenWidth) / p1PosXDivider;
+		player2.bar.x = static_cast<float>(screenWidth) / p2PosXDivider;
+		player1.bar.y = static_cast<float>(screenHeight) / 2;
+		player2.bar.y = static_cast<float>(screenHeight) / 2;
 
 	}
 
@@ -44,7 +44,7 @@ namespace catPong {
 		player1.color = RED;
 		player2.color = BLUE;
 		weirdCat = LoadImage("assets/imagenes/gato_original.png");
-		ImageResize(&weirdCat, paddle_width *7, paddle_height*1.6);
+		ImageResize(&weirdCat, static_cast<int>(paddle_width *7), static_cast<int>(paddle_height*1.6f));
 		player1.textura = LoadTextureFromImage(weirdCat);
 		player2.textura = LoadTextureFromImage(weirdCat);
 		UnloadImage(weirdCat);
